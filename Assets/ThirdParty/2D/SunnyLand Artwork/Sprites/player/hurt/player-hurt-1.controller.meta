@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d2f47f68bae431f4895504fb22e496f6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 103349
+  packageName: Sunny Land
+  packageVersion: 1.1
+  assetPath: Assets/SunnyLand Artwork/Sprites/player/hurt/player-hurt-1.controller
+  uploadId: 540939

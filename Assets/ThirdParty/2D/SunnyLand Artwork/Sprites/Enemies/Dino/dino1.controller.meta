@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a2c7358ca11c5a64284f4c4eaf7988eb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 103349
+  packageName: Sunny Land
+  packageVersion: 1.1
+  assetPath: Assets/SunnyLand Artwork/Sprites/Enemies/Dino/dino1.controller
+  uploadId: 540939

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b89f8dcc6e29e1246926278e095f4e5d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 103349
+  packageName: Sunny Land
+  packageVersion: 1.1
+  assetPath: Assets/SunnyLand Artwork/Sprites/Enemies/Eagle Hurt/hurt1.controller
+  uploadId: 540939
