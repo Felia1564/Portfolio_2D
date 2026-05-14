@@ -2,17 +2,23 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
 public static class GameUtil_Data
 {
+    // 마지막으로 할당된 ID를 전역적으로 기록 (스레드 안전)
+    private static long _lastId = 0;
+
     public static void LoadFullData()
     {
         // 게임 로딩할 때 불러올 데이터는 여기서! 
-        GameDataManager.Instance.LoadEnemyData("Enemy");
+        GameDataManager.Instance.LoadCharacterData("Character");
+        GameDataManager.Instance.LoadItemData("Item");
+        GameDataManager.Instance.LoadDialogueData();
+        GameDataManager.Instance.LoadAll();
     }
-
 
     public static Sprite LoadSpriteCanBeNull(string spriteName)
     {
@@ -29,7 +35,6 @@ public static class GameUtil_Data
         Debug.LogError($"에셋을 찾을 수 없습니다: {spriteName}");
         return null;
     }
-
 
     public static async UniTask<Sprite> LoadAndSetSpriteImage(Image targetImage, string spritePath)
     {
@@ -74,21 +79,44 @@ public static class GameUtil_Data
         targetRawImage.gameObject.SetActive(true);
     }
 
-    //public static List<string> GetDialogueIdList(string dialogueGroupId)
-    //{
-    //    var list = new List<string>();
+    public static List<string> GetDialogueIdList(string dialogueGroupId)
+    {
+        var list = new List<string>();
 
-    //    // "dialogue_group_mainstream_1_1"
-    //    var data = GameDataManager.Instance.GetDialogueGroupData(dialogueGroupId);
-    //    if (data != null)
-    //    {
-    //        var idArr = data.DialogueIdList;
-    //        foreach (var id in idArr)
-    //        {
-    //            list.Add(id);
-    //        }
-    //    }
+        // "dialogue_group_mainstream_1_1"
+        var data = GameDataManager.Instance.GetDialogueGroupData(dialogueGroupId);
+        if (data != null)
+        {
+            var idArr = data.DialogueIdList;
+            foreach (var id in idArr)
+            {
+                list.Add(id);
+            }
+        }
 
-    //    return list;
-    //}
+        return list;
+    }
+
+    // 그냥 유니크 키가 발급되어야 할 때 사용하려고 만든 것 (의미가 있는 건 아니므로 사용만 하세요)
+    public static long GenerateUniqueId()
+    {
+        long newId = DateTime.UtcNow.Ticks;
+
+        // 원자적 연산으로 안전하게 ID 갱신
+        while (true)
+        {
+            long lastId = Volatile.Read(ref _lastId);
+
+            // 만약 현재 시간이 이전 ID보다 작거나 같다면 (루프가 너무 빠른 경우 포함)
+            // 이전 ID + 1로 강제 설정하여 중복 방지
+            long idToAssign = (newId <= lastId) ? lastId + 1 : newId;
+
+            // _lastId가 내가 읽은 시점과 같다면 idToAssign으로 교체 (성공 시 루프 탈출)
+            if (Interlocked.CompareExchange(ref _lastId, idToAssign, lastId) == lastId)
+            {
+                return idToAssign;
+            }
+            // 그 사이 다른 스레드가 값을 바꿨다면 다시 시도
+        }
+    }
 }

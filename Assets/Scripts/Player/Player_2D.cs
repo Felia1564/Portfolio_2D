@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 
+public enum PlayerState
+{
+    Idle
+}
+
 
 // +) 어떤 컴포넌트가 필수로 필요하다는 것을 강제할 수 있다
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 
 public class Player_2D : MonoBehaviour
 {
@@ -22,10 +28,14 @@ public class Player_2D : MonoBehaviour
     private float _horizontalInput;
     private bool _lookRight = true;
 
+    private Animator _animator;
+    private bool isRun;
+
 
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
 
         // 2D 캐릭터가 물리 충돌 시 회전해서 넘어지는 것 방지
         _rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -52,6 +62,8 @@ public class Player_2D : MonoBehaviour
         {
             Flip();
         }
+
+        UpdateAnimation();
     }
 
 
@@ -97,4 +109,17 @@ public class Player_2D : MonoBehaviour
             Gizmos.DrawWireSphere(_groundCheck.position, _checkRadius);
         }
     }
+
+
+    #region ===== [AI - 애니메이션 함수] =====
+    void UpdateAnimation()
+    {
+        // _horizontalInput이 0이 아니라면(즉, 좌우 키를 누르고 있다면) 이동 중인 것으로 간주
+        // Mathf.Abs를 사용하여 음수(-1) 입력도 양수(1)로 바꿔서 확인합니다.
+        isRun = Mathf.Abs(_horizontalInput) > 0.1f;
+
+        // 애니메이터의 "isRun" 파라미터에 값을 전달합니다.
+        _animator.SetBool("isRun", isRun);
+    }
+    #endregion
 }

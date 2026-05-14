@@ -10,4 +10,14 @@ public class PlayerModel
     public Vector2 LastMapPosition;
     public string ItemDataID;
     public string QuestDataID;
+
+    public List<ItemModel> ItemList;
+}
+
+[Serializable]
+public class ItemModel
+{
+    public long ItemUniqueId;
+    public string ItemDataId;
+    public int ItemStackCount;
 }

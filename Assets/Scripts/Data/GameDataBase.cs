@@ -13,8 +13,61 @@ public class GameDataBase
 // 따라서 프로퍼티말고 그냥 일반 public 멤버변수로 변경함
 // [System.Serializable]가 없다면 JsonUtility는 데이터를 무시
 
+
+[System.Serializable]
+public class CharacterData : GameDataBase
+{
+    public string Name;
+}
+
+
 [System.Serializable]
 public class EnemyData : GameDataBase
 {
     public string Name;
+    public string PrefabPath;
+}
+
+
+[System.Serializable]
+public class ItemData : GameDataBase
+{
+    public string Name;
+    public string Description;
+    public string ItemType;
+    public string MaxStackCount;
+    public string IconPath;
+}
+
+
+[System.Serializable]
+public class DialogueGroupData : GameDataBase
+{
+    public List<string> DialogueIdList;
+}
+
+
+[System.Serializable]
+public class DialogueData : GameDataBase
+{
+    public string CharacterDataId;
+    public string Description;
+    public string NextDialogueId;
+    public List<string> SelectionNameList;
+    public List<string> SelectionDialogueIdList;
+    public string TexturePath;
+    public string VoicePath;
+}
+
+
+[System.Serializable]
+public class FieldObjData : GameDataBase
+{
+    public string Name;
+    public string Description;
+    public string FieldObjType;
+    public List<int> DropCountRange;
+    public string DropItemDataId;
+    public string IconPath;
+    public string PrefabPath;
 }

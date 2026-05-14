@@ -38,7 +38,7 @@ public static class UIExtension
     public static void ShowStartupUIOnGameStart(this UIManager uiManager)
     {
         uiManager.OpenLoadingUI();
-        //uiManager.OpenDialogueUI("dialogue_mainstream_1_1_100");
+        uiManager.OpenDialogueUI("dialogue_tutorial_1_1_100");
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
     }
@@ -60,18 +60,18 @@ public static class UIExtension
     }
 
 
-    //public static void OpenDialogueUI(this UIManager uiManager, string startDialogueId)
-    //{
-    //    var uiBase = uiManager.OpenContentUI(UIType.T_DialogueUI);
-    //    if (uiBase == null)
-    //    {
-    //        Debug.LogWarning($"UI가 생성되지 않았습니다");
-    //        return;
-    //    }
+    public static void OpenDialogueUI(this UIManager uiManager, string startDialogueId)
+    {
+        var uiBase = uiManager.OpenContentUI(UIType.T_DialogueUI);
+        if (uiBase == null)
+        {
+            Debug.LogWarning($"UI가 생성되지 않았습니다");
+            return;
+        }
 
-    //    if (uiBase is DaniTech_DialogueUI dialogueUi)
-    //    {
-    //        dialogueUi.StartDialogue(startDialogueId);
-    //    }
-    //}
+        if (uiBase is DialogueUI dialogueUi)
+        {
+            dialogueUi.StartDialogue(startDialogueId);
+        }
+    }
 }

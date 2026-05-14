@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-
 public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Inst { get; set; }
@@ -79,14 +78,29 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    // 2. 프리팹 생성 함수
-    public void Instantiate(string address, Transform parent = null)
+    public async UniTask<GameObject> InstantiateAsync(string address, Transform parent = null, bool instantiateInWorldSpace = false)
     {
-        Addressables.InstantiateAsync(address, parent).Completed += (op) =>
+        // 1. 생성 시도
+        AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(address, parent, instantiateInWorldSpace);
+
+        try
         {
-            if (op.Status != AsyncOperationStatus.Succeeded)
-                Debug.LogError($"프리팹 생성 실패: {address}");
-        };
+            // 2. UniTask로 변환하여 비동기 대기
+            GameObject instance = await handle.ToUniTask();
+
+            // 3. 성공 시 생성된 오브젝트 반환
+            return instance;
+        }
+        catch (System.Exception e)
+        {
+            // 4. 실패 시 예외 처리 및 핸들 해제
+            Debug.LogError($"프리팹 생성 실패: {address} / Error: {e.Message}");
+
+            if (handle.IsValid())
+                Addressables.Release(handle);
+
+            return null;
+        }
     }
 
     // 2-1. 스프라이트 로드 함수

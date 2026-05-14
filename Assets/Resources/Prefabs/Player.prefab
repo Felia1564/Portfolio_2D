@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1361842432160895719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2695965193627127787}
-  m_Layer: 0
-  m_Name: RealBackground
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2695965193627127787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361842432160895719}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 302880911081571055}
-  m_Father: {fileID: 6224570416136076367}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108281295059644215
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +198,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -255,6 +223,7 @@ GameObject:
   - component: {fileID: 185154779132283155}
   - component: {fileID: 7194816801966675985}
   - component: {fileID: 8487915176071922586}
+  - component: {fileID: 1540350037532688036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -275,7 +244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2695965193627127787}
+  - {fileID: 302880911081571055}
   m_Father: {fileID: 1189226107959478039}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &423359420057769116
@@ -393,6 +362,21 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &1540350037532688036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015208987557848507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d12c3b5f5b6fa42896e0c3f17b52c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 8746023466259815685}
+  smoothTime: 0.25
+  offset: {x: 0, y: 0, z: -10}
 --- !u!1 &7451788938387315287
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,12 +435,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8057133124708409044}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.35, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.3499999, z: 10}
   m_LocalScale: {x: 11.115, y: 11.129, z: 11.129}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2695965193627127787}
+  m_Father: {fileID: 6224570416136076367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1154775228713371801
 SpriteRenderer:
@@ -542,7 +526,7 @@ Transform:
   m_GameObject: {fileID: 8825581008443384370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.024, y: -0.248, z: 0}
+  m_LocalPosition: {x: 0.02, y: -0.248, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -28,8 +28,12 @@ public class GameDataManager : MonoBehaviour
     }
     // ---------------------------------------------------
 
-
+    public Dictionary<string, CharacterData> CharacterDataList { get; private set; } = new Dictionary<string, CharacterData>();
     public Dictionary<string, EnemyData> EnemyDataList { get; private set; } = new Dictionary<string, EnemyData>();
+    public Dictionary<string, ItemData> ItemDataList { get; private set; } = new Dictionary<string, ItemData>();
+    public Dictionary<string, DialogueGroupData> DialogueGroupDataList { get; private set; } = new Dictionary<string, DialogueGroupData>();
+    public Dictionary<string, DialogueData> DialogueDataList { get; private set; } = new Dictionary<string, DialogueData>();
+    public Dictionary<string, FieldObjData> FieldObjDataList { get; private set; } = new Dictionary<string, FieldObjData>();
 
 
     private Dictionary<string, T> LoadData<T>(string tableName) where T : GameDataBase
@@ -71,19 +75,71 @@ public class GameDataManager : MonoBehaviour
         return new Dictionary<string, T>();
     }
 
-    public void LoadEnemyData(string jsonPath)
+    public void LoadCharacterData(string jsonPath)
     {
-        EnemyDataList = LoadData<EnemyData>(jsonPath);
+        CharacterDataList = LoadData<CharacterData>(jsonPath);
+    }
+
+    public void LoadItemData(string jsonPath)
+    {
+        ItemDataList = LoadData<ItemData>(jsonPath);
+    }
+
+    public void LoadDialogueData()
+    {
+        DialogueGroupDataList = LoadData<DialogueGroupData>("DialogueGroup");
+        DialogueDataList = LoadData<DialogueData>("Dialogue");
+    }
+
+    public void LoadAll()
+    {
+        FieldObjDataList = LoadData<FieldObjData>("FieldObject");
+        EnemyDataList = LoadData<EnemyData>("Enemy");
     }
 
 
     // [아래는 사용을 위한 부분들을 메서드 정의] =========================================================================================
     // Get과 Find이름을 꼭 구별 하자!
 
-    public EnemyData GetCharacterData(string id)
+    public CharacterData GetCharacterData(string id)
     {
-        if (EnemyDataList == null || string.IsNullOrEmpty(id)) return null;
+        if (CharacterDataList == null || string.IsNullOrEmpty(id)) return null;
 
-        return EnemyDataList.TryGetValue(id, out var item) ? item : null;
+        return CharacterDataList.TryGetValue(id, out var item) ? item : null;
+    }
+
+    public EnemyData GetEnemyData(string dataId)
+    {
+        if (EnemyDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return EnemyDataList.TryGetValue(dataId, out var data) ? data : null;
+    }
+
+    public ItemData GetItemData(string id)
+    {
+        if (ItemDataList == null || string.IsNullOrEmpty(id)) return null;
+
+        return ItemDataList.TryGetValue(id, out var data) ? data : null;
+    }
+
+    public DialogueGroupData GetDialogueGroupData(string dataId)
+    {
+        if (DialogueGroupDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return DialogueGroupDataList.TryGetValue(dataId, out var data) ? data : null;
+    }
+
+    public DialogueData GetDialogueData(string dataId)
+    {
+        if (DialogueDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return DialogueDataList.TryGetValue(dataId, out var data) ? data : null;
+    }
+
+    public FieldObjData GetFieldObjData(string dataId)
+    {
+        if (FieldObjDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return FieldObjDataList.TryGetValue(dataId, out var data) ? data : null;
     }
 }

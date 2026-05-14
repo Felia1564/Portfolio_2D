@@ -24,7 +24,7 @@ public class LoadingUI : UIBase
 
     private void LoadAndSetLoadingImg()
     {
-        int randomIdx = UnityEngine.Random.Range(0, 2);
+        int randomIdx = UnityEngine.Random.Range(0, 1);
 
         string texturePath = string.Empty;
         switch (randomIdx)
