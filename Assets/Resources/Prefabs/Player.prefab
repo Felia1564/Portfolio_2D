@@ -51,7 +51,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_2D
   _moveSpeed: 8
-  _jumpForce: 12
+  _airControl: 0.6
+  _minJumpForce: 15
+  _maxJumpForce: 35
+  _maxChargeTime: 2
+  _jumpLockTime: 0.3
+  _coyoteTime: 0.1
+  _defaultJumpAngle: 60
+  _maxJumpAngle: 85
+  _minJumpAngle: 30
+  _gravityScale: 4
+  _chargingGravityScale: 0.5
+  _dotPrefab: {fileID: 0}
+  _trajectoryStepCount: 15
+  _trajectoryTimeStep: 0.1
   _groundCheck: {fileID: 8082701699287290011}
   _checkRadius: 0.5
   _groundLayer:
