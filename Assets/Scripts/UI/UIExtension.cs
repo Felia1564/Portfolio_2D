@@ -18,7 +18,8 @@ public enum UIType
     T_StartUI,
     T_PauseUI,
     T_LoadingUI,
-    T_DialogueUI
+    T_DialogueUI,
+    T_GameOverUI
 }
 
 
@@ -73,5 +74,13 @@ public static class UIExtension
         {
             dialogueUi.StartDialogue(startDialogueId);
         }
+    }
+
+
+    public static void OpenGameOverUI(this UIManager uiManager)
+    {
+        var uiBase = uiManager.OpenPopupUI(UIType.T_GameOverUI);
+
+        if (uiBase == null) return;
     }
 }

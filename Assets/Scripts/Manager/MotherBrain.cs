@@ -82,4 +82,19 @@ public class MotherBrain : MonoBehaviour
 
         _playerModel.ItemList.Add(newItem);
     }
+
+    public void GameOver()
+    {
+        Debug.Log("게임오버");
+        // 1. 플레이어 조작 비활성화 (선택 사항)
+        // 2. 사운드 매니저를 통해 승리 BGM 재생
+        // SoundManager.Instance.PlayBGM("Victory");
+
+        // 3. UIManager를 통해 승리 UI 출력
+        // (UIManager 구조에 맞춰 적절히 호출해주세요. 아래는 예시입니다.)
+        UIManager.Instance.OpenGameOverUI();
+
+        // 만약 UIManager가 아직 없고 직접 연결해서 쓴다면:
+        // _uiVictory.ShowVictoryUI(); 
+    }
 }
