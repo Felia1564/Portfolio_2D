@@ -20,6 +20,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b88eda6b16c9ba4d8011a270dc0d48c
+    m_Address: Icon/Icon_Item_Carrot_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bc073d49a03d4841b532d3ae1011968
+    m_Address: Prefab/Object/DropItem_Carrot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b171620870f83b042a7c24b43309eace, type: 2}
   m_SchemaSet:

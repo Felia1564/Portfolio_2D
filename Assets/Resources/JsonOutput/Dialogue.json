@@ -2,7 +2,7 @@
   {
     "Id": "dialogue_tutorial_1_1_100",
     "CharacterDataId": null,
-    "Description": "제 게임에 오신것을 환영합니다, 이 게임은 간략한 플랫포머 게임입니다<np>좌우 방향키로 이동, 스페이스로 점프를 수행할 수 있습니다",
+    "Description": "제 게임에 오신것을 환영합니다, 이 게임은 매우 간단한 플랫포머 게임으로, 테스트 빌드에 가깝습니다\n대화창은 마우스로 화면을 클릭해 넘길 수 있습니다<np>좌우 방향키로 이동, 스페이스로 점프를 수행할 수 있습니다\n점프의 경우 꾹 눌러 차징이 가능하며, 차징 도중 윗 방향키나 아래 방향키를 누르면 각도조절을 할 수 있습니다<np>현재 게임은 테스트 단계이기에 마을 우측의 우물로 뛰어들면 게임이 끝납니다",
     "NextDialogueId": null,
     "SelectionNameList": null,
     "SelectionDialogueIdList": null,

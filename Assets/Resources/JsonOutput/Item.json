@@ -1,34 +1,11 @@
 [
   {
-    "Id": "Item_DummyBox_1",
-    "Name": "상자",
-    "Description": "상자다. 딱히 의미가 있진 않다.",
+    "Id": "Obj_Carrot_01",
+    "Name": "당근",
+    "Description": "필드 당근",
     "ItemType": "Normal",
     "MaxStackCount": 20,
-    "IconPath": "Icon/Icon_Item_Box_1"
-  },
-  {
-    "Id": "Item_Gold_1",
-    "Name": "화폐",
-    "Description": "지역에 나타나는 금화",
-    "ItemType": "Normal",
-    "MaxStackCount": 1000,
-    "IconPath": "Icon/Icon_Item_Gold_1"
-  },
-  {
-    "Id": "Item_Equip_Hat_1",
-    "Name": "의문의 모자",
-    "Description": "착용하면 공격력이 강해진다.",
-    "ItemType": "Equipment",
-    "MaxStackCount": 0,
-    "IconPath": "Icon/Icon_Item_Equip_Hat_1"
-  },
-  {
-    "Id": "Item_Corn_1",
-    "Name": "옥수수",
-    "Description": "옥수수다",
-    "ItemType": "Normal",
-    "MaxStackCount": 100,
-    "IconPath": "Icon/Icon_Item_Corn"
+    "IconPath": "Icon/Icon_Item_Carrot_01",
+    "EffectValue": 30
   }
 ]

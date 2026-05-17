@@ -30,13 +30,22 @@ public class EnemyData : GameDataBase
 
 
 [System.Serializable]
+public class TrapData : GameDataBase
+{
+    public string Name;        // 함정 이름
+    public int Damage;         // 함정 데미지
+}
+
+
+[System.Serializable]
 public class ItemData : GameDataBase
 {
     public string Name;
     public string Description;
     public string ItemType;
-    public string MaxStackCount;
+    public int MaxStackCount;
     public string IconPath;
+    public int EffectValue;
 }
 
 

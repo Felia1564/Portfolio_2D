@@ -15,7 +15,9 @@ public class MotherBrain : MonoBehaviour
 {
     public static MotherBrain Instance { get; set; }
 
-    private PlayerModel _playerModel = new PlayerModel();
+    public PlayerModel PlayerModel { get; private set; } = new PlayerModel();
+
+    //private PlayerModel _playerModel = new PlayerModel();
 
 
     //public GameState currentState = GameState.StartMenu;
@@ -47,6 +49,13 @@ public class MotherBrain : MonoBehaviour
         //currentState = GameState.StartMenu;
 
         Debug.Log("게임 매니저 Start");
+
+        // 차후 GameDataBase.cs의 CharacterData에 체력(HP) 항목이 추가되면, 
+        // GameDataManager.Instance.GetCharacterData("PlayerID") 등을 활용해 값을 가져옵니다.
+        int maxHpFromData = 100; // 임시 데이터
+
+        PlayerModel.InitModel(maxHpFromData);
+        Debug.Log("플레이어 체력 세팅 완료");
     }
 
 
@@ -80,7 +89,7 @@ public class MotherBrain : MonoBehaviour
         newItem.ItemDataId = itemDataId;
         newItem.ItemStackCount = addItemCount;
 
-        _playerModel.ItemList.Add(newItem);
+        PlayerModel.ItemList.Add(newItem);
     }
 
     public void GameOver()
