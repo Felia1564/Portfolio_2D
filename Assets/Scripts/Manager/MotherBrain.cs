@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum GameState
 {
-    StartMenu,
+    LobbyMenu,
     InGame,
     PauseGame,
     GameOver
@@ -20,10 +20,10 @@ public class MotherBrain : MonoBehaviour
     //private PlayerModel _playerModel = new PlayerModel();
 
 
-    //public GameState currentState = GameState.StartMenu;
+    public GameState CurrentState { get; private set; } = GameState.LobbyMenu;
 
 
-    #region
+    #region ==================================================================================================== [작동부]
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -81,34 +81,18 @@ public class MotherBrain : MonoBehaviour
     #endregion
 
 
-    public void AddItem(string itemDataId, int addItemCount)
+    #region ==================================================================================================== [게임 상태 관리]
+    public void ChangeGameState(GameState newState)
     {
-        // 저장할때 고유값 ID를 부여하기 위해 사용
-        long uniqueId = GameUtil_Data.GenerateUniqueId();
-
-        // TODO : 우선 쉽게 사용할 수 있도록 중복 처리는 빼두었다. 습득할때마다 아이템이 하나씩 추가되도록 해두고
-        // 추후에 중복값은 StackCount가 다 찰때까지 누적해줄 수 있도록 로직을 추가하자
-        var newItem = new ItemModel();
-        newItem.ItemUniqueId = uniqueId;
-        newItem.ItemDataId = itemDataId;
-        newItem.ItemStackCount = addItemCount;
-
-        PlayerModel.ItemList.Add(newItem);
+        CurrentState = newState;
+        Debug.Log("게임 상태 변경됨");
     }
 
-    public void GameOver()
+    
+    public void StartGame()
     {
-        Debug.Log("게임오버");
-        // 1. 플레이어 조작 비활성화 (선택 사항)
-        // 2. 사운드 매니저를 통해 승리 BGM 재생
-        // SoundManager.Instance.PlayBGM("Victory");
-
-        // 3. UIManager를 통해 승리 UI 출력
-        // (UIManager 구조에 맞춰 적절히 호출해주세요. 아래는 예시입니다.)
-        UIManager.Instance.OpenGameOverUI();
-
-        // 만약 UIManager가 아직 없고 직접 연결해서 쓴다면:
-        // _uiVictory.ShowVictoryUI(); 
+        ChangeGameState(GameState.InGame);
+        Debug.Log("게임 시작");
     }
 
 
@@ -124,4 +108,39 @@ public class MotherBrain : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+
+    public void GameOver()
+    {
+        Debug.Log("게임오버");
+        // 1. 플레이어 조작 비활성화 (선택 사항)
+        // 2. 사운드 매니저를 통해 승리 BGM 재생
+        // SoundManager.Instance.PlayBGM("Victory");
+
+        // 3. UIManager를 통해 승리 UI 출력
+        // (UIManager 구조에 맞춰 적절히 호출해주세요. 아래는 예시입니다.)
+        UIManager.Instance.OpenGameOverUI();
+
+        // 만약 UIManager가 아직 없고 직접 연결해서 쓴다면:
+        // _uiVictory.ShowVictoryUI(); 
+    }
+    #endregion
+
+
+    #region ==================================================================================================== [게임 기능]
+    public void AddItem(string itemDataId, int addItemCount)
+    {
+        // 저장할때 고유값 ID를 부여하기 위해 사용
+        long uniqueId = GameUtil_Data.GenerateUniqueId();
+
+        // TODO : 우선 쉽게 사용할 수 있도록 중복 처리는 빼두었다. 습득할때마다 아이템이 하나씩 추가되도록 해두고
+        // 추후에 중복값은 StackCount가 다 찰때까지 누적해줄 수 있도록 로직을 추가하자
+        var newItem = new ItemModel();
+        newItem.ItemUniqueId = uniqueId;
+        newItem.ItemDataId = itemDataId;
+        newItem.ItemStackCount = addItemCount;
+
+        PlayerModel.ItemList.Add(newItem);
+    }
+    #endregion
 }

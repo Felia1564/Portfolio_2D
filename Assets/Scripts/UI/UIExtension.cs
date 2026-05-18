@@ -39,7 +39,7 @@ public static class UIExtension
     public static void ShowStartupUIOnGameStart(this UIManager uiManager)
     {
         uiManager.OpenLoadingUI();
-        uiManager.OpenDialogueUI("dialogue_tutorial_1_1_001");
+        //uiManager.OpenDialogueUI("dialogue_tutorial_1_1_001");
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
     }
