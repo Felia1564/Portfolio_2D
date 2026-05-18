@@ -3,7 +3,9 @@
     "Id": "dialogue_group_tutorial_1_1",
     "Comment": "튜토리얼 1_1챕터 그룹",
     "DialogueIdList": [
-      "dialogue_tutorial_1_1_100"
+      "dialogue_tutorial_1_1_001",
+      "dialogue_tutorial_1_1_002",
+      "dialogue_tutorial_1_1_003"
     ]
   },
   {

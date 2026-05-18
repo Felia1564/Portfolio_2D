@@ -67,7 +67,11 @@ public class MotherBrain : MonoBehaviour
 
     void Update()
     {
-        
+        // ESC 키를 누르면 게임 종료
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuitGame();
+        }
     }
 
     void LateUpdate()
@@ -105,5 +109,19 @@ public class MotherBrain : MonoBehaviour
 
         // 만약 UIManager가 아직 없고 직접 연결해서 쓴다면:
         // _uiVictory.ShowVictoryUI(); 
+    }
+
+
+    public void QuitGame()
+    {
+        Debug.Log("게임을 종료합니다.");
+
+#if UNITY_EDITOR
+        // 유니티 에디터 환경에서 플레이 모드를 종료합니다.
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // 실제 빌드된 게임(exe, apk 등)에서 어플리케이션을 종료합니다.
+        Application.Quit();
+#endif
     }
 }
