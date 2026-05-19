@@ -30,6 +30,7 @@ public class GameDataManager : MonoBehaviour
 
     public Dictionary<string, CharacterData> CharacterDataList { get; private set; } = new Dictionary<string, CharacterData>();
     public Dictionary<string, EnemyData> EnemyDataList { get; private set; } = new Dictionary<string, EnemyData>();
+    public Dictionary<string, StageData> StageDataList { get; private set; } = new Dictionary<string, StageData>();
     public Dictionary<string, TrapData> TrapDataList { get; private set; } = new Dictionary<string, TrapData>();
     public Dictionary<string, ItemData> ItemDataList { get; private set; } = new Dictionary<string, ItemData>();
     public Dictionary<string, DialogueGroupData> DialogueGroupDataList { get; private set; } = new Dictionary<string, DialogueGroupData>();
@@ -95,9 +96,10 @@ public class GameDataManager : MonoBehaviour
 
     public void LoadAll()
     {
-        FieldObjDataList = LoadData<FieldObjData>("FieldObject");
         EnemyDataList = LoadData<EnemyData>("Enemy");
+        StageDataList = LoadData<StageData>("Stage");
         TrapDataList = LoadData<TrapData>("Trap");
+        FieldObjDataList = LoadData<FieldObjData>("FieldObject");
     }
 
 
@@ -116,6 +118,13 @@ public class GameDataManager : MonoBehaviour
         if (EnemyDataList == null || string.IsNullOrEmpty(dataId)) return null;
 
         return EnemyDataList.TryGetValue(dataId, out var data) ? data : null;
+    }
+
+    public StageData GetStageData(string dataId)
+    {
+        if (StageDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return StageDataList.TryGetValue(dataId, out var data) ? data : null;
     }
 
     public TrapData GetTrapData(string dataId)

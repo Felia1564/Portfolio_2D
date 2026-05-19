@@ -19,7 +19,8 @@ public enum UIType
     T_PauseUI,
     T_LoadingUI,
     T_DialogueUI,
-    T_GameOverUI
+    T_GameOverUI,
+    T_TransitionUI
 }
 
 
@@ -38,16 +39,28 @@ public static class UIExtension
 
     public static void ShowStartupUIOnGameStart(this UIManager uiManager)
     {
-        uiManager.OpenLoadingUI();
-        //uiManager.OpenDialogueUI("dialogue_tutorial_1_1_001");
         // 게임 로비 UI를 여기서 오픈해주자 -> uiManager.
         // MainUI도
+
+        uiManager.OpenLoadingUI();
+
+        uiManager.OpenStartUI();
     }
 
 
     public static void OpenLoadingUI(this UIManager uiManager)
     {
         var uiBase = uiManager.OpenUI(UIRootType.VeryFrontUI, UIType.T_LoadingUI);
+        if (uiBase == null)
+        {
+            Debug.LogWarning($"UI가 생성되지 않았습니다");
+            return;
+        }
+    }
+
+    public static void OpenStartUI(this UIManager uiManager)
+    {
+        var uiBase = uiManager.OpenUI(UIRootType.StartUI, UIType.T_StartUI);
         if (uiBase == null)
         {
             Debug.LogWarning($"UI가 생성되지 않았습니다");

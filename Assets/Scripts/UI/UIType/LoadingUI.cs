@@ -12,6 +12,9 @@ public class LoadingUI : UIBase
     [SerializeField] private Image Image_SliderColor;
     [SerializeField] private UnityEngine.Color[] ColorArray_LoadingBar;
 
+    // [추가 1] 외부에서 로딩 연출 완료 시점을 알 수 있도록 이벤트 열어두기
+    public Action OnLoadingComplete;
+
     private CancellationTokenSource _cancelToken;
     float[] _pausePoints = { 0.2f, 0.6f, 0.9f };
     int _pauseIndex = 0;
@@ -76,6 +79,11 @@ public class LoadingUI : UIBase
 
         // 4. 완료 처리
         Slider_LoadingBar.value = 1.0f;
+
+        // [추가 2] 로딩 연출이 끝났다고 외부에 알림!
+        OnLoadingComplete?.Invoke();
+        OnLoadingComplete = null; // 이벤트 초기화 (메모리 누수 방지)
+
         UIManager.Instance.CloseLoadingUI();
     }
 

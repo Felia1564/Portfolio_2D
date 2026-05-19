@@ -30,6 +30,14 @@ public class EnemyData : GameDataBase
 
 
 [System.Serializable]
+public class StageData : GameDataBase
+{
+    public string Name;
+    public string NextStageId;    // 클리어 시 넘어갈 다음 스테이지의 ID
+    public string BgmPath;        // 해당 맵에서 재생할 BGM 경로
+    public string PrefabPath;
+}
+
 public class TrapData : GameDataBase
 {
     public string Name;        // 함정 이름

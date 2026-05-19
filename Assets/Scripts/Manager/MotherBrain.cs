@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum GameState
 {
-    LobbyMenu,
+    StartMenu,
     InGame,
     PauseGame,
     GameOver
@@ -20,7 +20,7 @@ public class MotherBrain : MonoBehaviour
     //private PlayerModel _playerModel = new PlayerModel();
 
 
-    public GameState CurrentState { get; private set; } = GameState.LobbyMenu;
+    public GameState CurrentState { get; private set; } = GameState.StartMenu;
 
 
     #region ==================================================================================================== [작동부]
@@ -29,6 +29,8 @@ public class MotherBrain : MonoBehaviour
         if (Instance == null) Instance = this;
 
         Debug.Log("게임 매니저 Awake");
+
+
     }
 
 
@@ -46,9 +48,11 @@ public class MotherBrain : MonoBehaviour
 
     private void Start()
     {
-        //currentState = GameState.StartMenu;
-
         Debug.Log("게임 매니저 Start");
+
+        UIManager.Instance.ShowStartupUIOnGameStart();
+
+        Debug.Log("로딩 + 시작 UI 불러옴");
 
         // 차후 GameDataBase.cs의 CharacterData에 체력(HP) 항목이 추가되면, 
         // GameDataManager.Instance.GetCharacterData("PlayerID") 등을 활용해 값을 가져옵니다.
@@ -85,14 +89,17 @@ public class MotherBrain : MonoBehaviour
     public void ChangeGameState(GameState newState)
     {
         CurrentState = newState;
-        Debug.Log("게임 상태 변경됨");
+        Debug.Log($"게임 상태 변경됨: {CurrentState}");
     }
 
-    
+
     public void StartGame()
     {
         ChangeGameState(GameState.InGame);
+
         Debug.Log("게임 시작");
+
+        UIManager.Instance.OpenDialogueUI("dialogue_tutorial_1_1_001");
     }
 
 
