@@ -20,7 +20,9 @@ public class MotherBrain : MonoBehaviour
     //private PlayerModel _playerModel = new PlayerModel();
 
 
-    public GameState CurrentState { get; private set; } = GameState.StartMenu;
+    public GameState CurrentState { get; private set; } = GameState.StartMenu; // 기본
+    //public GameState CurrentState { get; private set; } = GameState.InGame; // 테스트용 임시
+
 
 
     #region ==================================================================================================== [작동부]
@@ -71,10 +73,10 @@ public class MotherBrain : MonoBehaviour
 
     void Update()
     {
-        // ESC 키를 누르면 게임 종료
+        // ESC 키를 누르면 메뉴 오픈
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            QuitGame();
+            bool isPaused = UIManager.Instance.TogglePauseUI();
         }
     }
 

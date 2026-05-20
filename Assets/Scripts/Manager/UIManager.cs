@@ -47,6 +47,11 @@ public class UIManager : MonoBehaviour
         return openedUI;
     }
 
+    public bool IsUIOpened(UIType uiType)
+    {
+        // _openedUIDic 안에 해당 UI 타입이 들어있다면 켜져있는 상태(true)입니다.
+        return _openedUIDic.Contains(uiType);
+    }
 
     public void CloseUI(UIRootType uiRootType, UIType uiType)
     {

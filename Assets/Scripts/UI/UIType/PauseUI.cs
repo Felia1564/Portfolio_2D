@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : UIBase
 {
+    [SerializeField] private UIButton Button_Encyclopedia;
     [SerializeField] private UIButton Button_Achivement;
     [SerializeField] private UIButton Button_Title;
     [SerializeField] private UIButton Button_Quit;
@@ -10,9 +11,16 @@ public class PauseUI : UIBase
 
     private void OnEnable()
     {
+        Button_Encyclopedia.BindOnClickButtonEvent(OnClick_GameEncyclopedia);
         Button_Achivement.BindOnClickButtonEvent(OnClick_GameAchivement);
         Button_Title.BindOnClickButtonEvent(OnClick_GameTitle);
         Button_Quit.BindOnClickButtonEvent(OnClick_GameQuit);
+    }
+
+
+    public void OnClick_GameEncyclopedia()
+    {
+        Debug.Log("게임 도감 버튼 작동");
     }
 
     public void OnClick_GameAchivement()

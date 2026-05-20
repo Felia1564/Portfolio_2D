@@ -24,6 +24,7 @@ public enum UIType
 }
 
 
+
 public static class UIExtension
 {
     public static string GetUIPath(this UIManager uiManager, UIRootType uiRootType, UIType uiType)
@@ -65,6 +66,32 @@ public static class UIExtension
         {
             Debug.LogWarning($"UI가 생성되지 않았습니다");
             return;
+        }
+    }
+
+    public static bool TogglePauseUI(this UIManager uiManager)
+    {
+        // 1. 본체(UIManager)에게 현재 일시정지 UI가 켜져있는지 물어봅니다.
+        bool isCurrentlyOpen = uiManager.IsUIOpened(UIType.T_PauseUI);
+
+        if (isCurrentlyOpen)
+        {
+            // 2. 켜져있다면 닫습니다. (CloseUI 함수가 UIManager에 있다고 가정)
+            uiManager.CloseUI(UIRootType.VeryFrontUI, UIType.T_PauseUI);
+            return false; // 이제 꺼졌음을 MotherBrain에 반환
+        }
+
+        else
+        {
+            // 3. 꺼져있다면 엽니다.
+            var uiBase = uiManager.OpenUI(UIRootType.VeryFrontUI, UIType.T_PauseUI);
+            if (uiBase == null)
+            {
+                Debug.LogWarning($"UI가 생성되지 않았습니다");
+                // 실패했으니 열리지 않았음(false)을 MotherBrain에 알리고 여기서 함수를 즉시 탈출합니다!
+                return false;
+            }
+            return true; // 이제 켜졌음을 MotherBrain에 반환
         }
     }
 

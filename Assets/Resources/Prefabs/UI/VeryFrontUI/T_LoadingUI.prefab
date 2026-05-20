@@ -442,11 +442,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   SpriteArray_Sprite:
-  - {fileID: 21300000, guid: b720d569e917e774eaf672a3c146d7c7, type: 3}
-  - {fileID: 21300000, guid: 9d7630effb329c049b3ef165d9c5b9d8, type: 3}
-  - {fileID: 21300000, guid: 1656966a2ee20b047a582d21fbedd871, type: 3}
-  - {fileID: 21300000, guid: 48574b96faf031a42956cea9a899a54f, type: 3}
-  - {fileID: 21300000, guid: e4e45ec9c23a6cc458871cf8f4e665a7, type: 3}
+  - {fileID: 21300000, guid: bd59bf2e866ed4529ae645637eb9c11d, type: 3}
+  - {fileID: 21300000, guid: c9e6b5e11d0ef456eb7f7ebd3e750671, type: 3}
+  - {fileID: 21300000, guid: de20f767e3f3f4aff870112daa2b2562, type: 3}
+  - {fileID: 21300000, guid: 5f35659c40d6a435fade670c478a52b1, type: 3}
+  - {fileID: 21300000, guid: 63fd366633d434aeb8ee3ee766305016, type: 3}
   _sequenceInterval: 0.3
   _isLoop: 1
 --- !u!1 &6818179393572094737
