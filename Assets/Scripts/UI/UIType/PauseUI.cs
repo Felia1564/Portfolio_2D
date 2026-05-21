@@ -7,6 +7,8 @@ public class PauseUI : UIBase
     [SerializeField] private UIButton Button_Achivement;
     [SerializeField] private UIButton Button_Title;
     [SerializeField] private UIButton Button_Quit;
+    [SerializeField] private GameObject UI_Encyclopedia;
+    [SerializeField] private GameObject UI_Achivement;
 
 
     private void OnEnable()

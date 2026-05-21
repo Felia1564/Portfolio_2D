@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 1788297572899481872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.33, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 4.3, y: 4.3, z: 4.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -281,8 +281,8 @@ Transform:
   m_GameObject: {fileID: 4654149496414243019}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.3499999, z: 10}
-  m_LocalScale: {x: 11.115, y: 11.129, z: 11.129}
+  m_LocalPosition: {x: 0, y: -2.2, z: 10}
+  m_LocalScale: {x: 16, y: 16, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6116142271250897196}
@@ -355,11 +355,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6116142271250897196}
+  - component: {fileID: 6047413521161848990}
   - component: {fileID: 7980309773687679372}
-  - component: {fileID: 8736901054255772490}
+  - component: {fileID: 4802139352352684165}
   - component: {fileID: 1189634482953781975}
   - component: {fileID: 7320299628809633441}
-  - component: {fileID: 6047413521161848990}
+  - component: {fileID: 8736901054255772490}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -383,6 +384,24 @@ Transform:
   - {fileID: 6907228412764122936}
   m_Father: {fileID: 5907198045581115083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6047413521161848990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562613403277213003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d12c3b5f5b6fa42896e0c3f17b52c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 6473342022687009029}
+  smoothTime: 0.1
+  offset: {x: 0, y: 0, z: -10}
+  pullRatioX: 0.75
+  pullRatioY: 0.3
+  maxPullDistance: 25
 --- !u!20 &7980309773687679372
 Camera:
   m_ObjectHideFlags: 0
@@ -418,7 +437,7 @@ Camera:
   far clip plane: 1000
   field of view: 88
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 16.875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -434,14 +453,30 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8736901054255772490
-AudioListener:
+--- !u!114 &4802139352352684165
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5562613403277213003}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
+  m_ComponentVersion: 1
+  m_AssetsPPU: 40
+  m_RefResolutionX: 1920
+  m_RefResolutionY: 1080
+  m_CropFrame: 0
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!114 &1189634482953781975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,24 +533,14 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &6047413521161848990
-MonoBehaviour:
+--- !u!81 &8736901054255772490
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5562613403277213003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d12c3b5f5b6fa42896e0c3f17b52c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 6473342022687009029}
-  smoothTime: 0.1
-  offset: {x: 0, y: 0, z: -10}
-  pullRatioX: 0.75
-  pullRatioY: 0.3
-  maxPullDistance: 25
+  m_Enabled: 0
 --- !u!1 &6751544363131197067
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6927427713851717521}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
