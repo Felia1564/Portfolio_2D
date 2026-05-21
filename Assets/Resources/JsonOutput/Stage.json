@@ -1,0 +1,9 @@
+[
+  {
+    "Id": "enemy_type1",
+    "Name": "적",
+    "NextStageId": null,
+    "BgmPath": null,
+    "PrefabPath": null
+  }
+]

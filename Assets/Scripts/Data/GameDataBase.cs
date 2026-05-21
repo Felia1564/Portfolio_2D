@@ -38,6 +38,7 @@ public class StageData : GameDataBase
     public string PrefabPath;
 }
 
+[System.Serializable]
 public class TrapData : GameDataBase
 {
     public string Name;        // 함정 이름
