@@ -128,29 +128,55 @@ public class GameObjManager : MonoBehaviour
         }
 
         var createdObj = await ResourceManager.Inst.InstantiateAsync(targetPrefabPath, Root_Enemy, true);
+        // =========================================================================
+        // 🚨 [핵심 방어 코드] 기다리는 동안 맵이 바뀌어서 스폰 스팟이 파괴되었다면?
+        // =========================================================================
+        if (spawnSpot == null)
+        {
+            Debug.LogWarning($"[GameObjManager] 맵이 전환되어 {dataId} 생성을 취소합니다.");
+
+            // 이미 생성되어 버린 오브젝트가 좀비가 되지 않게 즉시 파괴
+            if (createdObj != null)
+            {
+                Destroy(createdObj);
+            }
+
+            return; // 아래의 위치 이동 및 리스트 등록 로직을 실행하지 않고 즉시 종료!
+        }
+        // =========================================================================
         createdObj.transform.position = spawnSpot.position;
 
         AddFieldObjOnCreate(createdObj, dataId);
     }
 
-    private void AddFieldObjOnCreate(GameObject createdObj, string DataId)
+    private void AddFieldObjOnCreate(GameObject createdObj, string dataId)
     {
         _objInstanceKeyGenerator++;
         var generatedInstanceId = _objInstanceKeyGenerator;
 
-        var itemBase = createdObj.GetComponent<ItemBase>();
+        var itemBase = createdObj.GetComponentInChildren<ItemBase>();
         if (itemBase != null)
         {
             _itemContainer.Add(generatedInstanceId, itemBase);
-            itemBase.InitItemInfoOnCreated(generatedInstanceId, DataId);
+            itemBase.InitItemInfoOnCreated(generatedInstanceId, dataId);
+            return;
         }
 
-        var trapBase = createdObj.GetComponent<TrapBase>();
+        var trapBase = createdObj.GetComponentInChildren<TrapBase>();
         if (trapBase != null)
         {
             _trapContainer.Add(generatedInstanceId, trapBase);
-            trapBase.InitTrapInfoOnCreated(generatedInstanceId, DataId);
+            trapBase.InitTrapInfoOnCreated(generatedInstanceId, dataId);
+            return;
         }
+
+        // ====================================================================
+        // 3. [핵심] 아이템도 아니고 함정도 아니라면? -> 여기서 고스트가 발생했음!
+        // ====================================================================
+        Debug.LogWarning($"[GameObjManager] 경고! '{createdObj.name}'(ID: {dataId}) 프리팹에 ItemBase나 TrapBase 스크립트가 안 붙어있습니다! 일단 '기타 명부'에 강제로 등록합니다.");
+
+        // 정체불명이지만, 맵 넘어갈 때 안 지워지는 좀비가 되면 안 되니까 일반 명부에라도 강제로 기록해둠.
+        _createdGameObjContainer.Add(generatedInstanceId, createdObj);
     }
 
     public void RequestDestroyFieldObj(int instanceId)
@@ -175,5 +201,32 @@ public class GameObjManager : MonoBehaviour
         }
 
         return _itemContainer[fieldObjInstanceId];
+    }
+
+
+    public void ClearAllFieldObjs()
+    {
+        // _itemContainer와 _trapContainer 등에 있는 모든 오브젝트를 파괴합니다.
+        // 리스트를 순회하며 Destroy(obj)를 호출하고 리스트를 Clear() 하면 됩니다.
+
+        foreach (var item in _itemContainer.Values)
+        {
+            if (item != null) Destroy(item.gameObject);
+        }
+        _itemContainer.Clear();
+
+        foreach (var trap in _trapContainer.Values)
+        {
+            if (trap != null) Destroy(trap.gameObject);
+        }
+        _trapContainer.Clear();
+
+        foreach (var obj in _createdGameObjContainer.Values)
+        {
+            if (obj != null) Destroy(obj);
+        }
+        _createdGameObjContainer.Clear();
+
+        Debug.Log("모든 필드 오브젝트 및 몬스터가 정리되었습니다.");
     }
 }

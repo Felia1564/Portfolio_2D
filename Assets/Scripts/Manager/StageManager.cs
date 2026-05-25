@@ -16,6 +16,40 @@ public class StageManager : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+     string startStagePath = "Stage/stage_start_01";
+        LoadNextStage(startStagePath);
+    }
+
+    public bool LoadNextStage(string nextStagePrefabPath)
+    {
+        GameObjManager.Inst.ClearAllFieldObjs();
+
+        // 동기 로드, 약간의 게임 멈춤 발생함
+        GameObject loadedStagePrefab = ResourceManager.Inst.LoadAssetSync<GameObject>(nextStagePrefabPath);
+
+        if (loadedStagePrefab != null)
+        {
+            // [수정된 안전장치] 
+            // 새 맵을 만들기 전에, 기존 맵 오브젝트를 명확하게 타겟팅하여 제거합니다.
+            if (_currentStageObj != null)
+            {
+                GameObject mapToDestroy = _currentStageObj;
+                _currentStageObj = null; // 참조를 먼저 비워줍니다.
+                Destroy(mapToDestroy);   // 임시 변수에 담긴 진짜 오브젝트를 파괴합니다.
+            }
+
+            // 2. 새 맵 생성 및 기억
+            _currentStageObj = Instantiate(loadedStagePrefab);
+            return true;
+        }
+
+        Debug.LogError($"[{nextStagePrefabPath}] 맵 로딩에 실패했습니다.");
+        return false;
+    }
+
+
     //public async UniTaskVoid LoadNextStageSequence(string nextStagePrefabPath)
     //{
     //    // =========================================================

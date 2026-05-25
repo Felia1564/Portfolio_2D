@@ -174,4 +174,25 @@ public class ResourceManager : MonoBehaviour
             Debug.Log($"에셋 메모리 해제 완료: {address}");
         }
     }
+
+
+    // 동기 로드 메서드
+public T LoadAssetSync<T>(string address) where T : UnityEngine.Object
+    {
+        // 1. 이미 로드된 에셋인지 확인하기 (캐시 활용)
+        if (_handles.TryGetValue(address, out AsyncOperationHandle handle))
+        {
+            return handle.Result as T;
+        }
+
+        // 2. 어드레서블 로드
+        AsyncOperationHandle<T> loadHandle = Addressables.LoadAssetAsync<T>(address);
+
+        // 3. 비동기를 강제로 동기화
+        T result = loadHandle.WaitForCompletion();
+
+        // 4. 캐시에 저장 후 반환
+        _handles[address] = loadHandle;
+        return result;
+    }
 }

@@ -9,7 +9,7 @@
   {
     "Id": "stage_start_01",
     "Name": "시작 스테이지",
-    "NextStageId": "stage_level1_01",
+    "NextStageId": "stage_01_test",
     "BgmPath": null,
     "PrefabPath": "Stage/stage_start_01"
   },

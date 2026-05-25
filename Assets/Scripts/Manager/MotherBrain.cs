@@ -42,10 +42,10 @@ public class MotherBrain : MonoBehaviour
     }
 
 
-    private void OnDIsable()
-    {
+    //private void OnDIsable()
+    //{
 
-    }
+    //}
 
 
     private void Start()
