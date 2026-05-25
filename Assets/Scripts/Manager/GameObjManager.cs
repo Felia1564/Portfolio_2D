@@ -15,7 +15,8 @@ public class GameObjManager : MonoBehaviour
 
     // 생성된 오브젝트의 생명을 보관
     private Dictionary<int, GameObject> _createdGameObjContainer = new Dictionary<int, GameObject>();
-    private Dictionary<int, FieldObj_2D> _fieldObjContainer = new Dictionary<int, FieldObj_2D>();
+    private Dictionary<int, ItemBase> _itemContainer = new Dictionary<int, ItemBase>();
+    private Dictionary<int, TrapBase> _trapContainer = new Dictionary<int, TrapBase>();
 
     private void Awake()
     {
@@ -101,51 +102,78 @@ public class GameObjManager : MonoBehaviour
 
     //[필드 오브젝트] ====================================================================================================
 
-    public async UniTaskVoid CreateFieldObj(string fieldObjDataId, Transform spawnSpot)
+    public async UniTaskVoid CreateFieldObj(string dataId, Transform spawnSpot)
     {
-        var fieldObj = GameDataManager.Instance.GetFieldObjData(fieldObjDataId);
-        if (fieldObj != null)
+        string targetPrefabPath = "";
+
+        var itemData = GameDataManager.Instance.GetItemData(dataId);
+        if (itemData != null)
         {
-            var createdObj = await ResourceManager.Inst.InstantiateAsync(fieldObj.PrefabPath, Root_Enemy, true);
-            createdObj.transform.position = spawnSpot.position;
-            AddFieldObjOnCreate(createdObj, fieldObjDataId);
+            targetPrefabPath = itemData.PrefabPath;
         }
+
+        else
+        {
+            var trapData = GameDataManager.Instance.GetTrapData(dataId);
+            if (trapData != null)
+            {
+                targetPrefabPath = trapData.PrefabPath;
+            }
+        }
+
+        if (string.IsNullOrEmpty(targetPrefabPath))
+        {
+            Debug.LogError($"[GameObjManager] {dataId}에 해당하는 프리팹 경로를 데이터에서 찾을 수 없습니다!");
+            return;
+        }
+
+        var createdObj = await ResourceManager.Inst.InstantiateAsync(targetPrefabPath, Root_Enemy, true);
+        createdObj.transform.position = spawnSpot.position;
+
+        AddFieldObjOnCreate(createdObj, dataId);
     }
 
-    private void AddFieldObjOnCreate(GameObject createdObj, string fieldObjDataId)
+    private void AddFieldObjOnCreate(GameObject createdObj, string DataId)
     {
         _objInstanceKeyGenerator++;
         var generatedInstanceId = _objInstanceKeyGenerator;
-        var fieldObj = createdObj.GetComponent<FieldObj_2D>();
 
-        if (fieldObj != null)
+        var itemBase = createdObj.GetComponent<ItemBase>();
+        if (itemBase != null)
         {
-            _fieldObjContainer.Add(generatedInstanceId, fieldObj);
-            fieldObj.InitFieldObjInfoOnCreated(generatedInstanceId, fieldObjDataId);
+            _itemContainer.Add(generatedInstanceId, itemBase);
+            itemBase.InitItemInfoOnCreated(generatedInstanceId, DataId);
+        }
+
+        var trapBase = createdObj.GetComponent<TrapBase>();
+        if (trapBase != null)
+        {
+            _trapContainer.Add(generatedInstanceId, trapBase);
+            trapBase.InitTrapInfoOnCreated(generatedInstanceId, DataId);
         }
     }
 
     public void RequestDestroyFieldObj(int instanceId)
     {
-        var fieldObjComponent = GetFieldObjByInstanceId(instanceId);
+        var fieldObjComponent = GetItemByInstanceId(instanceId);
         if (fieldObjComponent == null)
         {
             return;
         }
 
         // 요청된 필드 오브젝트를 제거함
-        _fieldObjContainer.Remove(instanceId);
+        _itemContainer.Remove(instanceId);
         Destroy(fieldObjComponent.gameObject);
     }
 
-    public FieldObj_2D GetFieldObjByInstanceId(int fieldObjInstanceId)
+    public ItemBase GetItemByInstanceId(int fieldObjInstanceId)
     {
-        if (_fieldObjContainer.ContainsKey(fieldObjInstanceId) == false)
+        if (_itemContainer.ContainsKey(fieldObjInstanceId) == false)
         {
             Debug.LogError($"{fieldObjInstanceId} 찾으려는 필드 오브젝트가 유효하지 않습니다");
             return null;
         }
 
-        return _fieldObjContainer[fieldObjInstanceId];
+        return _itemContainer[fieldObjInstanceId];
     }
 }

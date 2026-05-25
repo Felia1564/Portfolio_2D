@@ -1,11 +1,10 @@
 [
   {
-    "Id": "Obj_Carrot_01",
-    "Name": "당근",
-    "Description": "필드 당근",
-    "ItemType": "Normal",
-    "MaxStackCount": 20,
-    "IconPath": "Icon/Icon_Item_Carrot_01",
-    "EffectValue": 30
+    "Id": "obj_cherry_01",
+    "FieldObjectType": "Heal",
+    "Name": "체리",
+    "HealValue": 30,
+    "IconPath": "Icon/Icon_Obj/Icon_Item/Icon_Item_Cherry_01",
+    "PrefabPath": "Prefab/Obj/Item/DropItem_Cherry"
   }
 ]

@@ -1,9 +1,23 @@
 [
   {
-    "Id": "enemy_type1",
-    "Name": "적",
-    "NextStageId": null,
+    "Id": "stage_tutorial_01",
+    "Name": "튜토리얼 스테이지",
+    "NextStageId": "stage_start_01",
     "BgmPath": null,
     "PrefabPath": null
+  },
+  {
+    "Id": "stage_start_01",
+    "Name": "시작 스테이지",
+    "NextStageId": "stage_level1_01",
+    "BgmPath": null,
+    "PrefabPath": "Stage/stage_start_01"
+  },
+  {
+    "Id": "stage_01_test",
+    "Name": "테스트 스테이지",
+    "NextStageId": null,
+    "BgmPath": null,
+    "PrefabPath": "Stage/Stage01/stage_01_test"
   }
 ]

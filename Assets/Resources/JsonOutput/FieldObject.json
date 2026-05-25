@@ -1,15 +1,14 @@
 [
   {
-    "Id": "obj_carrot_01",
+    "Id": "obj_cherry_01",
     "FieldObjectType": "Harvest",
-    "Name": "당근",
-    "Description": "필드 당근",
+    "Name": "체리",
+    "Description": "필드 체리",
     "DropCountRange": [
-      10,
-      100
+      1
     ],
     "DropItemDataId": "Obj_Carrot_01",
-    "IconPath": null,
-    "PrefabPath": "Prefab/Object/DropItem_Carrot"
+    "IconPath": "Icon/Icon_Obj/Icon_Item/Icon_Item_Carrot_01",
+    "PrefabPath": "Prefab/Obj/Item/DropItem_Cherry"
   }
 ]

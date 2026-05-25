@@ -38,32 +38,41 @@ public class StageData : GameDataBase
     public string PrefabPath;
 }
 
-[System.Serializable]
-public class TrapData : GameDataBase
-{
-    public string Name;        // 함정 이름
-    public int Damage;         // 함정 데미지
-}
 
-
+//    // =========================================================
+//    // 아이템, 오브젝트
+//    // =========================================================
 [System.Serializable]
 public class ItemData : GameDataBase
 {
     public string Name;
     public string Description;
-    public string ItemType;
-    public int MaxStackCount;
-    public string IconPath;
+    public string FieldObjType;
     public int EffectValue;
+    public string IconPath;
+    public string PrefabPath;
 }
 
+[System.Serializable]
+public class TrapData : GameDataBase
+{
+    public string Name;        // 함정 이름
+    public int Damage;         // 함정 데미지
+    public string Type;
+    public string IconPath;
+    public string PrefabPath;
+}
+
+
+//    // =========================================================
+//    // 다이얼로그
+//    // =========================================================
 
 [System.Serializable]
 public class DialogueGroupData : GameDataBase
 {
     public List<string> DialogueIdList;
 }
-
 
 [System.Serializable]
 public class DialogueData : GameDataBase
@@ -75,17 +84,4 @@ public class DialogueData : GameDataBase
     public List<string> SelectionDialogueIdList;
     public string TexturePath;
     public string VoicePath;
-}
-
-
-[System.Serializable]
-public class FieldObjData : GameDataBase
-{
-    public string Name;
-    public string Description;
-    public string FieldObjType;
-    public List<int> DropCountRange;
-    public string DropItemDataId;
-    public string IconPath;
-    public string PrefabPath;
 }

@@ -7,8 +7,6 @@ public class PauseUI : UIBase
     [SerializeField] private UIButton Button_Achivement;
     [SerializeField] private UIButton Button_Title;
     [SerializeField] private UIButton Button_Quit;
-    [SerializeField] private GameObject UI_Encyclopedia;
-    [SerializeField] private GameObject UI_Achivement;
 
 
     private void OnEnable()
@@ -23,11 +21,15 @@ public class PauseUI : UIBase
     public void OnClick_GameEncyclopedia()
     {
         Debug.Log("게임 도감 버튼 작동");
+
+        //UIManager.Instance.OpenContentUI(UIType.T_EncyclopediaUI);
     }
 
     public void OnClick_GameAchivement()
     {
         Debug.Log("게임 도전과제 버튼 작동");
+
+        UIManager.Instance.OpenContentUI(UIType.T_AchievementUI);
     }
 
     public void OnClick_GameTitle() // 나중에 강사님께 질문해보기

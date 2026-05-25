@@ -90,6 +90,8 @@ public class MotherBrain : MonoBehaviour
     #region ==================================================================================================== [게임 상태 관리]
     public void ChangeGameState(GameState newState)
     {
+        if (CurrentState == newState) return;
+
         CurrentState = newState;
         Debug.Log($"게임 상태 변경됨: {CurrentState}");
     }

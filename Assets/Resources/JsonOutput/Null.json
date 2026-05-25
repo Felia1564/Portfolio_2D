@@ -1,0 +1,11 @@
+[
+  {
+    "Id": "Obj_Cherry_01",
+    "Name": "체리",
+    "Description": "플레이어의 친구",
+    "ItemType": "Heal",
+    "MaxStackCount": 1,
+    "IconPath": "Icon/Icon_Obj/Icon_Item/Icon_Item_Carrot_01",
+    "EffectValue": 30
+  }
+]

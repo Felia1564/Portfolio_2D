@@ -20,7 +20,9 @@ public enum UIType
     T_LoadingUI,
     T_DialogueUI,
     T_GameOverUI,
-    T_TransitionUI
+    T_TransitionUI,
+    T_AchievementUI,
+    T_EncyclopediaUI
 }
 
 
@@ -77,20 +79,25 @@ public static class UIExtension
         if (isCurrentlyOpen)
         {
             // 2. 켜져있다면 닫습니다. (CloseUI 함수가 UIManager에 있다고 가정)
-            uiManager.CloseUI(UIRootType.VeryFrontUI, UIType.T_PauseUI);
+            uiManager.CloseUI(UIRootType.ContentUI, UIType.T_PauseUI);
+
+            MotherBrain.Instance.ChangeGameState(GameState.InGame);
+
             return false; // 이제 꺼졌음을 MotherBrain에 반환
         }
 
         else
         {
             // 3. 꺼져있다면 엽니다.
-            var uiBase = uiManager.OpenUI(UIRootType.VeryFrontUI, UIType.T_PauseUI);
+            var uiBase = uiManager.OpenUI(UIRootType.ContentUI, UIType.T_PauseUI);
             if (uiBase == null)
             {
                 Debug.LogWarning($"UI가 생성되지 않았습니다");
                 // 실패했으니 열리지 않았음(false)을 MotherBrain에 알리고 여기서 함수를 즉시 탈출합니다!
                 return false;
             }
+            MotherBrain.Instance.ChangeGameState(GameState.PauseGame);
+
             return true; // 이제 켜졌음을 MotherBrain에 반환
         }
     }
@@ -109,6 +116,8 @@ public static class UIExtension
             Debug.LogWarning($"UI가 생성되지 않았습니다");
             return;
         }
+
+        MotherBrain.Instance.ChangeGameState(GameState.PauseGame);
 
         if (uiBase is DialogueUI dialogueUi)
         {

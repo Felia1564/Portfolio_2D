@@ -3,6 +3,7 @@
     "Id": "trap_solid_spike_01",
     "Name": "가시함정1",
     "Description": "일반적인 가시 함정",
-    "Damage": 10
+    "Damage": 10,
+    "PrefabPath": "Prefab/Obj/Trap/Trap_Spike"
   }
 ]

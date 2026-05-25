@@ -54,6 +54,8 @@ public class DialogueUI : UIBase
             return true;
         }
 
+        MotherBrain.Instance.ChangeGameState(GameState.InGame);
+
         return false;
     }
 
