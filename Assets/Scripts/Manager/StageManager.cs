@@ -10,12 +10,10 @@ public class StageManager : MonoBehaviour
     // 현재 씬에 띄워져 있는 스테이지(맵) 프리팹을 기억하기 위한 변수
     private GameObject _currentStageObj;
 
-
-    ///// 골인 지점이나 다음 스테이지로 넘어갈 때 호출할 맵 교체 시퀀스
-    //private void Awake()
-    //{
-    //    if (Instance == null) Instance = this;
-    //}
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
 
     //public async UniTaskVoid LoadNextStageSequence(string nextStagePrefabPath)
