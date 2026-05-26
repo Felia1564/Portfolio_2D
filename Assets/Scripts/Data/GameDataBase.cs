@@ -48,7 +48,7 @@ public class ItemData : GameDataBase
     public string Name;
     public string Description;
     public string FieldObjType;
-    public int EffectValue;
+    public int HealValue;
     public string IconPath;
     public string PrefabPath;
 }

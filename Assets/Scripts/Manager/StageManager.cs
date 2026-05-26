@@ -16,11 +16,11 @@ public class StageManager : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-     string startStagePath = "Stage/stage_start_01";
-        LoadNextStage(startStagePath);
-    }
+    //private void Start()
+    //{
+    // string startStagePath = "Stage/stage_start_01";
+    //    LoadNextStage(startStagePath);
+    //}
 
     public bool LoadNextStage(string nextStagePrefabPath)
     {

@@ -40,6 +40,15 @@ public class GameObjManager : MonoBehaviour
 
         // 1-1 생성에 성공했다면, 미리 Key를 발급한다.
         _objInstanceKeyGenerator++;
+        int generatedInstanceId = _objInstanceKeyGenerator;
+
+        // 2. [수정됨] DaniTech_2DEnemy 대신 우리가 만든 최상위 부모인 EnemyBase를 찾습니다.
+        // 이렇게 하면 Enemy_Moving이든 Enemy_Turret이든 모두 EnemyBase를 상속받았기 때문에 정상적으로 찾아집니다! (다형성)
+        var enemyComp = gObj.GetComponent<EnemyBase>();
+        if (enemyComp != null)
+        {
+            enemyComp.InitEnemyInfo(generatedInstanceId);
+        }
 
         // 1-2 Dictionary에 추가하기 전에 미리 키 검사한다
         if (_createdGameObjContainer.ContainsKey(_objInstanceKeyGenerator) == true)
@@ -58,7 +67,7 @@ public class GameObjManager : MonoBehaviour
     private void InitGeneratedEntityObj(int generatedId, GameObject gObj)
     {
         // 4-1 지금은 Enemy지만, 나중에 IGameEntity 같은 인터페이스로 개선하면 더 좋다
-        Enemy_2D gameEntity = gObj.GetComponent<Enemy_2D>();
+        EnemyBase gameEntity = gObj.GetComponent<EnemyBase>();
         if (gameEntity == null)
         {
             Debug.LogWarning($"생성된 {gObj.name}의 InstanceId를 대입할 수 있는 컴포넌트를 가져올 수 없습니다!");
@@ -154,7 +163,7 @@ public class GameObjManager : MonoBehaviour
         _objInstanceKeyGenerator++;
         var generatedInstanceId = _objInstanceKeyGenerator;
 
-        var itemBase = createdObj.GetComponentInChildren<ItemBase>();
+        var itemBase = createdObj.GetComponent<ItemBase>();
         if (itemBase != null)
         {
             _itemContainer.Add(generatedInstanceId, itemBase);
@@ -162,7 +171,7 @@ public class GameObjManager : MonoBehaviour
             return;
         }
 
-        var trapBase = createdObj.GetComponentInChildren<TrapBase>();
+        var trapBase = createdObj.GetComponent<TrapBase>();
         if (trapBase != null)
         {
             _trapContainer.Add(generatedInstanceId, trapBase);
