@@ -16,11 +16,11 @@ public class StageManager : MonoBehaviour
     }
 
 
-    //private void Start()
-    //{
-    // string startStagePath = "Stage/stage_start_01";
-    //    LoadNextStage(startStagePath);
-    //}
+    private void Start()
+    {
+        string startStagePath = "Stage/stage_start_01";
+        LoadNextStage(startStagePath);
+    }
 
     public bool LoadNextStage(string nextStagePrefabPath)
     {
@@ -49,51 +49,57 @@ public class StageManager : MonoBehaviour
         return false;
     }
 
+    public async UniTask LoadNextStageSequence(string nextStagePrefabPath, GameObject playerObj)
+    {
+        // =========================================================
+        // 1. 플레이어 조작 끊기 (상태 변경)
+        // =========================================================
+        MotherBrain.Instance.ChangeGameState(GameState.PauseGame);
 
-    //public async UniTaskVoid LoadNextStageSequence(string nextStagePrefabPath)
-    //{
-    //    // =========================================================
-    //    // 1. 화면 가리기 (Transition In)
-    //    // =========================================================
+        TransitionUI transitionUI = UIManager.Instance.OpenTransitionUI();
+        if (transitionUI == null) return; // 에러 방지 방어 코드
 
-
-
-    //    // =========================================================
-    //    // 2. 로딩 UI 띄우고 다음 맵 프리팹 비동기 로드하기
-    //    // =========================================================
-
-    //    GameObject loadedStagePrefab = await ResourceManager.Inst.LoadAsset<GameObject>(nextStagePrefabPath);
-
-    //    if (loadedStagePrefab == null)
-    //    {
-    //        Debug.LogError($"스테이지 로드 실패, 잘못된 주소입니다: {nextStagePrefabPath}");
-    //        // 실패 시 로딩 연출만 끝내고 리턴할지, 재시도할지 등 예외 처리
-    //    }
+        // =========================================================
+        // 2 & 3. 화면 전환 UI의 가림막 띄우고 가리기 애니메이션 재생 및 완벽 대기
+        // =========================================================
+        await transitionUI.PlayTransitionInAsync();
 
 
-    //    // =========================================================
-    //    // 3. 화면이 가려진 틈을 타 몰래 기존 맵 파괴 및 새 맵 생성
-    //    // =========================================================
+        // =========================================================
+        // 4. 화면이 완전히 덮인 후, 맵 동기 로드 시작
+        // =========================================================
+        bool isSuccess = LoadNextStage(nextStagePrefabPath);
 
-    //    if (_currentStageObj != null)
-    //    {
-    //        Destroy(_currentStageObj);
-    //        // 기존 맵이 파괴되면서 남긴 찌꺼기 메모리를 확실히 청소해 줍니다.
-    //        Resources.UnloadUnusedAssets();
-    //    }
+        if (!isSuccess)
+        {
+            UIManager.Instance.CloseTransitionUI();
+            MotherBrain.Instance.ChangeGameState(GameState.InGame);
+            return;
+        }
 
-    //    if (loadedStagePrefab != null)
-    //    {
-    //        _currentStageObj = Instantiate(loadedStagePrefab);
-    //    }
+        // =========================================================
+        // 5-1. 동기 로드 완료 확인 후, 플레이어 (0, 0) 이동 및 물리 가속도 제거
+        // =========================================================
+        if (playerObj != null)
+        {
+            playerObj.transform.position = new Vector3(0, 0, playerObj.transform.position.z);
+            Rigidbody2D playerRigid = playerObj.GetComponent<Rigidbody2D>();
+            if (playerRigid != null) playerRigid.linearVelocity = Vector2.zero;
+        }
 
-    //    // =========================================================
-    //    // 4. 화면 밝히기 (Transition Out)
-    //    // =========================================================
+        // 플레이어가 이동하고 바닥 콜라이더에 안착할 수 있도록 아주 미세한 유예 시간 부여
+        await UniTask.Delay(50, ignoreTimeScale: true);
 
-    //    // =========================================================
-    //    // 5. 시퀀스 종료 및 정리
-    //    // =========================================================
 
-    //}
+        // =========================================================
+        // 5-2 & 6. 화면 밝힘 애니메이션 재생 후 UI 끄기, 조작 복구
+        // =========================================================
+        // 위화감 없이 빠르거나 자연스럽게 걷어내는 애니메이션 대기
+        await transitionUI.PlayTransitionOutAsync();
+
+        UIManager.Instance.CloseTransitionUI();
+
+        // 다시 플레이어 조작 가능하게 락 해제
+        MotherBrain.Instance.ChangeGameState(GameState.InGame);
+    }
 }

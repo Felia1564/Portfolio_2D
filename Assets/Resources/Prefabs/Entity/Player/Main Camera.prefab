@@ -52,8 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 0}
   smoothTime: 0.1
-  offset: {x: 0, y: 0, z: -10}
-  pullRatioX: 0.75
+  offset: {x: 0, y: 5, z: -10}
+  pullRatioX: 0.4
   pullRatioY: 0.3
   maxPullDistance: 25
 --- !u!20 &671796173686406581
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
   m_ComponentVersion: 1
-  m_AssetsPPU: 40
+  m_AssetsPPU: 32
   m_RefResolutionX: 1920
   m_RefResolutionY: 1080
   m_CropFrame: 0

@@ -3,7 +3,7 @@
 
 public interface IDamageable // 데미지를 입을 수 있는가
 {
-    void TakeDamage(int damageAmount);
+    bool TakeDamage(int damageAmount);
 }
 
 

@@ -17,95 +17,117 @@ public class GameObjManager : MonoBehaviour
     private Dictionary<int, GameObject> _createdGameObjContainer = new Dictionary<int, GameObject>();
     private Dictionary<int, ItemBase> _itemContainer = new Dictionary<int, ItemBase>();
     private Dictionary<int, TrapBase> _trapContainer = new Dictionary<int, TrapBase>();
+    private Dictionary<int, EnemyBase> _enemyContainer = new Dictionary<int, EnemyBase>();
 
     private void Awake()
     {
         Inst = this;
     }
 
-    public void RequestSpawnEnemy()
+    //public void RequestSpawnEnemy()
+    //{
+    //    if (Prefab_Enemy == null)
+    //    {
+    //        Debug.LogWarning("프리팹이 등록되지 않은 오브젝트 입니다.");
+    //        return;
+    //    }
+
+    //    var gObj = Instantiate(Prefab_Enemy, Root_Enemy);
+    //    if (gObj == null)
+    //    {
+    //        Debug.LogWarning("생성에 실패한 게임 오브젝트 입니다.");
+    //        return;
+    //    }
+
+    //    // 1-1 생성에 성공했다면, 미리 Key를 발급한다.
+    //    _objInstanceKeyGenerator++;
+    //    int generatedInstanceId = _objInstanceKeyGenerator;
+
+    //    // 2. [수정됨] DaniTech_2DEnemy 대신 우리가 만든 최상위 부모인 EnemyBase를 찾습니다.
+    //    // 이렇게 하면 Enemy_Moving이든 Enemy_Turret이든 모두 EnemyBase를 상속받았기 때문에 정상적으로 찾아집니다! (다형성)
+    //    var enemyComp = gObj.GetComponent<EnemyBase>();
+    //    if (enemyComp != null)
+    //    {
+    //        enemyComp.InitEnemyInfo(generatedInstanceId);
+    //    }
+
+    //    // 1-2 Dictionary에 추가하기 전에 미리 키 검사한다
+    //    if (_createdGameObjContainer.ContainsKey(_objInstanceKeyGenerator) == true)
+    //    {
+    //        Debug.LogWarning("이미 동일한 키가 발급된 게임 오브젝트가 존재합니다");
+    //        return;
+    //    }
+
+    //    // 1-3 동적생성(실체화)된 오브젝트를 게임 오브젝트 매니저의 자료구조(Dictionary)에 보관하자!
+    //    _createdGameObjContainer.Add(_objInstanceKeyGenerator, gObj);
+    //    InitGeneratedEntityObj(_objInstanceKeyGenerator, gObj);
+
+    //    Debug.Log($"키: {_objInstanceKeyGenerator}의 객체 {gObj.name}이 호출되었습니다.");
+    //}
+
+    //private void InitGeneratedEntityObj(int generatedId, GameObject gObj)
+    //{
+    //    // 4-1 지금은 Enemy지만, 나중에 IGameEntity 같은 인터페이스로 개선하면 더 좋다
+    //    EnemyBase gameEntity = gObj.GetComponent<EnemyBase>();
+    //    if (gameEntity == null)
+    //    {
+    //        Debug.LogWarning($"생성된 {gObj.name}의 InstanceId를 대입할 수 있는 컴포넌트를 가져올 수 없습니다!");
+    //        return;
+    //    }
+
+    //    // 4-2 생성된 객체에 정보를 부여한다!
+    //    gameEntity.InitEnemyInfo(generatedId);
+    //}
+
+
+    //public GameObject GetEntityObjCanBeNull(int instanceId)
+    //{
+    //    if (_createdGameObjContainer.ContainsKey(instanceId) == false)
+    //    {
+    //        Debug.LogWarning($"{instanceId}는 존재하지 않습니다.");
+    //        return null;
+    //    }
+
+    //    // 2-1 실체화하면서 등록된 게임 오브젝트가 있다면 반환
+    //    return _createdGameObjContainer[instanceId];
+    //}
+
+    //public void RequestDestroyEntityObj(int instanceId)
+    //{
+    //    var gObj = GetEntityObjCanBeNull(instanceId);
+    //    if (gObj == null)
+    //    {
+    //        return;
+    //    }
+
+    //    // 3-1 요청된 객체를 제거함
+    //    _createdGameObjContainer.Remove(instanceId);
+    //    Destroy(gObj);
+    //}
+
+
+    public async UniTaskVoid CreateEnemyObj(string dataId, Transform spawnSpot)
     {
-        if (Prefab_Enemy == null)
-        {
-            Debug.LogWarning("프리팹이 등록되지 않은 오브젝트 입니다.");
-            return;
-        }
+        // 1. 데이터 부서에서 몬스터의 어드레서블 경로를 찾아옴
+        var enemyData = GameDataManager.Instance.GetEnemyData(dataId);
 
-        var gObj = Instantiate(Prefab_Enemy, Root_Enemy);
-        if (gObj == null)
-        {
-            Debug.LogWarning("생성에 실패한 게임 오브젝트 입니다.");
-            return;
-        }
+        // 2. 리소스 매니저가 비동기로 렉 없이 프리팹을 불러오고 생성함
+        var createdObj = await ResourceManager.Inst.InstantiateAsync(enemyData.PrefabPath, Root_Enemy, true);
 
-        // 1-1 생성에 성공했다면, 미리 Key를 발급한다.
+        // 방어 코드: 로딩 중 맵이 바뀌면 파괴
+        if (spawnSpot == null) { Destroy(createdObj); return; }
+
+        // 3. 위치 세팅 및 초기화 (생성 키 발급)
+        createdObj.transform.position = spawnSpot.position;
+
         _objInstanceKeyGenerator++;
-        int generatedInstanceId = _objInstanceKeyGenerator;
-
-        // 2. [수정됨] DaniTech_2DEnemy 대신 우리가 만든 최상위 부모인 EnemyBase를 찾습니다.
-        // 이렇게 하면 Enemy_Moving이든 Enemy_Turret이든 모두 EnemyBase를 상속받았기 때문에 정상적으로 찾아집니다! (다형성)
-        var enemyComp = gObj.GetComponent<EnemyBase>();
+        var enemyComp = createdObj.GetComponent<EnemyBase>();
         if (enemyComp != null)
         {
-            enemyComp.InitEnemyInfo(generatedInstanceId);
+            enemyComp.InitEnemyInfo(_objInstanceKeyGenerator, dataId);
+            _createdGameObjContainer.Add(_objInstanceKeyGenerator, createdObj);
         }
-
-        // 1-2 Dictionary에 추가하기 전에 미리 키 검사한다
-        if (_createdGameObjContainer.ContainsKey(_objInstanceKeyGenerator) == true)
-        {
-            Debug.LogWarning("이미 동일한 키가 발급된 게임 오브젝트가 존재합니다");
-            return;
-        }
-
-        // 1-3 동적생성(실체화)된 오브젝트를 게임 오브젝트 매니저의 자료구조(Dictionary)에 보관하자!
-        _createdGameObjContainer.Add(_objInstanceKeyGenerator, gObj);
-        InitGeneratedEntityObj(_objInstanceKeyGenerator, gObj);
-
-        Debug.Log($"키: {_objInstanceKeyGenerator}의 객체 {gObj.name}이 호출되었습니다.");
     }
-
-    private void InitGeneratedEntityObj(int generatedId, GameObject gObj)
-    {
-        // 4-1 지금은 Enemy지만, 나중에 IGameEntity 같은 인터페이스로 개선하면 더 좋다
-        EnemyBase gameEntity = gObj.GetComponent<EnemyBase>();
-        if (gameEntity == null)
-        {
-            Debug.LogWarning($"생성된 {gObj.name}의 InstanceId를 대입할 수 있는 컴포넌트를 가져올 수 없습니다!");
-            return;
-        }
-
-        // 4-2 생성된 객체에 정보를 부여한다!
-        gameEntity.InitEnemyInfo(generatedId);
-    }
-
-
-    public GameObject GetEntityObjCanBeNull(int instanceId)
-    {
-        if (_createdGameObjContainer.ContainsKey(instanceId) == false)
-        {
-            Debug.LogWarning($"{instanceId}는 존재하지 않습니다.");
-            return null;
-        }
-
-        // 2-1 실체화하면서 등록된 게임 오브젝트가 있다면 반환
-        return _createdGameObjContainer[instanceId];
-    }
-
-    public void RequestDestroyEntityObj(int instanceId)
-    {
-        var gObj = GetEntityObjCanBeNull(instanceId);
-        if (gObj == null)
-        {
-            return;
-        }
-
-        // 3-1 요청된 객체를 제거함
-        _createdGameObjContainer.Remove(instanceId);
-        Destroy(gObj);
-    }
-
-
-
 
 
 
@@ -116,17 +138,17 @@ public class GameObjManager : MonoBehaviour
         string targetPrefabPath = "";
 
         var itemData = GameDataManager.Instance.GetItemData(dataId);
-        if (itemData != null)
-        {
-            targetPrefabPath = itemData.PrefabPath;
-        }
-
+        if (itemData != null) targetPrefabPath = itemData.PrefabPath;
         else
         {
+            // 2. 함정 데이터 확인
             var trapData = GameDataManager.Instance.GetTrapData(dataId);
-            if (trapData != null)
+            if (trapData != null) targetPrefabPath = trapData.PrefabPath;
+            else
             {
-                targetPrefabPath = trapData.PrefabPath;
+                // 🌟 3. [추가] 적(Enemy) 데이터 확인!
+                var enemyData = GameDataManager.Instance.GetEnemyData(dataId);
+                if (enemyData != null) targetPrefabPath = enemyData.PrefabPath;
             }
         }
 
@@ -176,6 +198,15 @@ public class GameObjManager : MonoBehaviour
         {
             _trapContainer.Add(generatedInstanceId, trapBase);
             trapBase.InitTrapInfoOnCreated(generatedInstanceId, dataId);
+            return;
+        }
+
+        var enemyBase = createdObj.GetComponent<EnemyBase>();
+        if (enemyBase != null)
+        {
+            _enemyContainer.Add(generatedInstanceId, enemyBase);
+            // 주의: 기존 InitEnemyInfo가 id만 받았다면, dataId도 받아서 능력치 세팅을 하도록 EnemyBase 스크립트 수정이 필요할 수 있습니다.
+            enemyBase.InitEnemyInfo(generatedInstanceId, dataId);
             return;
         }
 

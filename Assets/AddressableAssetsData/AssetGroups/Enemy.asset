@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: ed05f444e35194a49885514686bff4e1
   m_SerializeEntries:
   - m_GUID: e0dbcc03265c15e40a0477f2b84217c0
-    m_Address: Obj/Enemy/Dog
+    m_Address: Obj/Enemy/enemy_dog_001
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

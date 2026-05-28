@@ -132,4 +132,29 @@ public static class UIExtension
 
         if (uiBase == null) return;
     }
+
+
+    public static TransitionUI OpenTransitionUI(this UIManager uiManager)
+    {
+        // 기수 규칙에 따라 VeryFrontUI 레이어에 T_TransitionUI를 오픈합니다.
+        var uiBase = uiManager.OpenUI(UIRootType.VeryFrontUI, UIType.T_TransitionUI);
+        if (uiBase == null)
+        {
+            Debug.LogWarning("T_TransitionUI 프리팹이 생성되지 않았습니다.");
+            return null;
+        }
+
+        // UIBase로 리턴된 객체를 실제 사용해야 할 TransitionUI 타입으로 안전하게 캐스팅하여 반환합니다.
+        if (uiBase is TransitionUI transitionUI)
+        {
+            return transitionUI;
+        }
+
+        return null;
+    }
+
+    public static void CloseTransitionUI(this UIManager uiManager)
+    {
+        uiManager.CloseUI(UIRootType.VeryFrontUI, UIType.T_TransitionUI);
+    }
 }

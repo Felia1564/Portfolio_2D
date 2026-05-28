@@ -20,8 +20,8 @@ public class MotherBrain : MonoBehaviour
     //private PlayerModel _playerModel = new PlayerModel();
 
 
-    public GameState CurrentState { get; private set; } = GameState.StartMenu; // 기본
-    //public GameState CurrentState { get; private set; } = GameState.InGame; // 테스트용 임시
+    //public GameState CurrentState { get; private set; } = GameState.StartMenu; // 기본
+    public GameState CurrentState { get; private set; } = GameState.InGame; // 테스트용 임시
 
 
 
