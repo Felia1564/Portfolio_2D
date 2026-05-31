@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 
 
@@ -29,7 +30,15 @@ public class EnemyData : GameDataBase
 }
 
 
+
 [System.Serializable]
+public class CollectionData : GameDataBase
+{
+    public string Name;
+    public string Description;
+    public string IconPath;
+}
+
 public class StageData : GameDataBase
 {
     public string Name;
@@ -49,7 +58,6 @@ public class ItemData : GameDataBase
     public string Description;
     public string FieldObjType;
     public int HealValue;
-    public string IconPath;
     public string PrefabPath;
 }
 

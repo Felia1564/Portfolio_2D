@@ -16,16 +16,21 @@ MonoBehaviour:
   m_GUID: 3f2d5cad2c9d5064a96d123ea0648e06
   m_SerializeEntries:
   - m_GUID: 26776526721ebd3499769df5df0a66e0
-    m_Address: Prefab/Obj/Trap/Trap_Spike
+    m_Address: Trap/Trap_Spike
     m_ReadOnly: 0
     m_SerializedLabels:
     - Trap
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7bc073d49a03d4841b532d3ae1011968
-    m_Address: Prefab/Obj/Item/DropItem_Cherry
+    m_Address: Item/DropItem_Cherry
     m_ReadOnly: 0
     m_SerializedLabels:
     - Item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4d3872eb5e1c5f42955e07da00f7548
+    m_Address: Collective/obj_collecton_gem_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b171620870f83b042a7c24b43309eace, type: 2}

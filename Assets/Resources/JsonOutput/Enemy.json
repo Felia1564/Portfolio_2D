@@ -2,6 +2,6 @@
   {
     "Id": "enemy_dog_001",
     "Name": "개",
-    "PrefabPath": "Obj/Enemy/enemy_dog_001"
+    "PrefabPath": "Enemy/enemy_dog_001"
   }
 ]
