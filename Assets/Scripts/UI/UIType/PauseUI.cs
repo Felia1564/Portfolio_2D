@@ -22,7 +22,7 @@ public class PauseUI : UIBase
     {
         Debug.Log("게임 도감 버튼 작동");
 
-        //UIManager.Instance.OpenContentUI(UIType.T_EncyclopediaUI);
+        UIManager.Instance.OpenContentUI(UIType.T_EncyclopediaUI);
     }
 
     public void OnClick_GameAchivement()
