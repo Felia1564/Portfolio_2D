@@ -1109,8 +1109,6 @@ MonoBehaviour:
     _prefab: Assets/Resources/Prefabs/Managers/MotherBrain.prefab
   - _gameObject: {fileID: 1815269990}
     _prefab: Assets/Resources/Prefabs/Managers/UIManager.prefab
-  - _gameObject: {fileID: 8496630772062362884}
-    _prefab: Assets/Resources/Prefabs/UI/CollectiveSlot.prefab
   - _gameObject: {fileID: 910978401}
     _prefab: Assets/Resources/Prefabs/Managers/NetworkManager.prefab
   - _gameObject: {fileID: 1253588688}
@@ -1985,11 +1983,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e1be7e1a1b57844199bddfedb18e288, type: 3}
---- !u!1 &8496630772062362884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8870535817466600292, guid: 4e1be7e1a1b57844199bddfedb18e288, type: 3}
-  m_PrefabInstance: {fileID: 8496630772062362883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8667124013388998217
 PrefabInstance:
   m_ObjectHideFlags: 0
