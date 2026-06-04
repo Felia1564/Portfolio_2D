@@ -15,6 +15,7 @@ public static class GameUtil_Data
     {
         // 게임 로딩할 때 불러올 데이터는 여기서! 
         GameDataManager.Instance.LoadCharacterData("Character");
+        GameDataManager.Instance.LoadCollectionData("Collection");
         GameDataManager.Instance.LoadStageData("Stage");
         GameDataManager.Instance.LoadDialogueData();
         GameDataManager.Instance.LoadAll();

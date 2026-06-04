@@ -30,6 +30,7 @@ public class GameDataManager : MonoBehaviour
 
     public Dictionary<string, CharacterData> CharacterDataList { get; private set; } = new Dictionary<string, CharacterData>();
     public Dictionary<string, EnemyData> EnemyDataList { get; private set; } = new Dictionary<string, EnemyData>();
+    public Dictionary<string, CollectionData> CollectionDataList { get; private set; } = new Dictionary<string, CollectionData>();
     public Dictionary<string, StageData> StageDataList { get; private set; } = new Dictionary<string, StageData>();
     public Dictionary<string, ItemData> ItemDataList { get; private set; } = new Dictionary<string, ItemData>();
     public Dictionary<string, TrapData> TrapDataList { get; private set; } = new Dictionary<string, TrapData>();
@@ -82,10 +83,10 @@ public class GameDataManager : MonoBehaviour
         CharacterDataList = LoadData<CharacterData>(jsonPath);
     }
 
-    //public void LoadItemData(string jsonPath)
-    //{
-    //    ItemDataList = LoadData<ItemData>(jsonPath);
-    //}
+    public void LoadCollectionData(string jsonPath)
+    {
+        CollectionDataList = LoadData<CollectionData>(jsonPath);
+    }
 
     public void LoadStageData(string jsonPath)
     {
@@ -124,6 +125,13 @@ public class GameDataManager : MonoBehaviour
         return EnemyDataList.TryGetValue(dataId, out var data) ? data : null;
     }
 
+    public CollectionData GetCollectionData(string dataId)
+    {
+        if (CollectionDataList == null || string.IsNullOrEmpty(dataId)) return null;
+
+        return CollectionDataList.TryGetValue(dataId, out var data) ? data : null;
+    }
+
     public StageData GetStageData(string dataId)
     {
         if (StageDataList == null || string.IsNullOrEmpty(dataId)) return null;
@@ -158,11 +166,4 @@ public class GameDataManager : MonoBehaviour
 
         return DialogueDataList.TryGetValue(dataId, out var data) ? data : null;
     }
-
-    //public FieldObjData GetFieldObjData(string dataId)
-    //{
-    //    if (FieldObjDataList == null || string.IsNullOrEmpty(dataId)) return null;
-
-    //    return FieldObjDataList.TryGetValue(dataId, out var data) ? data : null;
-    //}
 }

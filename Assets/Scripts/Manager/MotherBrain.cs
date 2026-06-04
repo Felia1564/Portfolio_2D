@@ -139,19 +139,49 @@ public class MotherBrain : MonoBehaviour
 
 
     #region ==================================================================================================== [게임 기능]
-    public void AddItem(string itemDataId, int addItemCount)
+    // 💡 1. 단순 수집품(보석 등 도감용) 획득 시 호출
+    public void AddCollectedItem(string gemDataId)
     {
-        // 저장할때 고유값 ID를 부여하기 위해 사용
-        long uniqueId = GameUtil_Data.GenerateUniqueId();
+        if (PlayerModel == null) return;
 
-        // TODO : 우선 쉽게 사용할 수 있도록 중복 처리는 빼두었다. 습득할때마다 아이템이 하나씩 추가되도록 해두고
-        // 추후에 중복값은 StackCount가 다 찰때까지 누적해줄 수 있도록 로직을 추가하자
-        var newItem = new ItemModel();
-        newItem.ItemUniqueId = uniqueId;
-        newItem.ItemDataId = itemDataId;
-        newItem.ItemStackCount = addItemCount;
+        // PlayerModel 내부에서 중복 검사를 하고 리스트에 추가합니다.
+        if (!PlayerModel.HasItem(gemDataId))
+        {
+            PlayerModel.CollectItem(gemDataId);
 
-        PlayerModel.ItemList.Add(newItem);
+            // 💡 런타임 최적화: 도감 UI가 화면에 열려있는 상태라면 즉시 갱신하라고 UIManager에 지시!
+            if (UIManager.Instance != null)
+            {
+                // UIManager 쪽에 이전에 만들어둔 갱신 함수 호출
+                // UIManager.Instance.RefreshEncyclopediaIfOpened();
+            }
+        }
+        else
+        {
+            Debug.Log($"[MotherBrain] 이미 획득한 수집품입니다: {gemDataId}");
+        }
+    }
+
+    // 💡 2. 스킬 해금(2단 점프, 대쉬 등) 아이템 획득 시 호출
+    public void UnlockSkill(string skillId)
+    {
+        if (PlayerModel == null) return;
+
+        // PlayerModel 내부에서 중복 검사를 하고 스킬을 해금합니다.
+        if (!PlayerModel.HasSkill(skillId))
+        {
+            PlayerModel.UnlockSkill(skillId);
+
+            // 💡 스킬을 획득했을 때 화면 중앙에 "새로운 스킬 획득!" 팝업을 띄우고 싶다면 여기서 처리
+            if (UIManager.Instance != null)
+            {
+                // 예시: UIManager.Instance.OpenSkillUnlockPopup(skillId);
+            }
+        }
+        else
+        {
+            Debug.Log($"[MotherBrain] 이미 해금된 스킬입니다: {skillId}");
+        }
     }
     #endregion
 }
