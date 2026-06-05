@@ -130,6 +130,8 @@ public static class UIExtension
     {
         var uiBase = uiManager.OpenPopupUI(UIType.T_GameOverUI);
 
+        MotherBrain.Instance.ChangeGameState(GameState.GameOver);
+
         if (uiBase == null) return;
     }
 
@@ -156,5 +158,27 @@ public static class UIExtension
     public static void CloseTransitionUI(this UIManager uiManager)
     {
         uiManager.CloseUI(UIRootType.VeryFrontUI, UIType.T_TransitionUI);
+    }
+
+
+    public static void RefreshEncyclopediaIfOpened(this UIManager uiManager)
+    {
+        Debug.Log("UI매니저 넘겨받기 확인");
+
+        // 1. UIManager에 만들어둔 함수를 이용해 도감 UI가 켜져있는지 확인합니다.
+        // (UIType.T_EncyclopediaUI 등 사용자님의 Enum 이름에 맞춰주세요)
+        if (uiManager.IsUIOpened(UIType.T_EncyclopediaUI))
+        {
+            // 2. 새로 만든 GetUI()를 통해 객체 낚아채기
+            var uiBase = uiManager.GetUI(UIType.T_EncyclopediaUI);
+
+            // 3. 작성해주신 대로 아주 안전하게 캐스팅!
+            if (uiBase is EncyclopediaUI encyclopediaUI)
+            {
+                // 4. 갱신 함수 호출
+                encyclopediaUI.RefreshEncyclopediaUI();
+                Debug.Log("도감 UI 갱신 신호 전달 완료!");
+            }
+        }
     }
 }

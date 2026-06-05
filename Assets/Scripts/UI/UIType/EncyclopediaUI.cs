@@ -83,6 +83,8 @@ public class EncyclopediaUI : UIBase
     // 💡 전체 수집품 리스트를 새로고침하여 화면에 그리는 함수
     public void RefreshEncyclopediaUI()
     {
+        Debug.Log("도감 UI 갱신 신호 전달 받음");
+
         ClearOldSlots();
 
         if (GameDataManager.Instance == null || MotherBrain.Instance == null) return;
@@ -103,7 +105,7 @@ public class EncyclopediaUI : UIBase
             _spawnedSlots.Add(slotGO);
 
             // 3. 알맹이 컴포넌트를 찾아 데이터, 획득여부, 클릭이벤트 콜백(OnSelectSlot)을 안전하게 주입(Dependency Injection)
-            var slotScript = slotGO.GetComponent<EncyclopediaSlotUI>();
+            var slotScript = slotGO.GetComponent<CollectiveSlot>();
             if (slotScript != null)
             {
                 slotScript.InitSlotElement(metaData, isCollected, OnSelectSlot);

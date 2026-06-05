@@ -30,6 +30,16 @@ public class UIManager : MonoBehaviour
         //this.ShowStartupUIOnGameStart();
     }
 
+    public UIBase GetUI(UIType uiType) // 임의로 개터 메서드 추가
+    {
+        // 딕셔너리에 해당 UI가 만들어져 있다면 반환하고, 없으면 null 반환
+        if (_createdUIDic.ContainsKey(uiType))
+        {
+            return _createdUIDic[uiType];
+        }
+        return null;
+    }
+
 
     public UIBase OpenUI(UIRootType uiRootType, UIType uiType, bool isInitialHide = false)
     {

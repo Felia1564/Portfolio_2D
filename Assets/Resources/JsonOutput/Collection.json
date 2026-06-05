@@ -3,6 +3,7 @@
     "Id": "collection_gem_01",
     "Name": "보석",
     "Description": "보석 1",
-    "IconPath": "Icon/Icon_Obj/Icon_Item/Icon_Item_Cherry_01"
+    "IconPath": "Icon/Icon_Obj/Icon_Item/gem-1",
+    "Type": "Item"
   }
 ]

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks; // UniTask 사용 시
 
-public class EncyclopediaSlotUI : MonoBehaviour
+public class CollectiveSlot : MonoBehaviour
 {
     [SerializeField] private Image Image_Icon; // 도화지 (인스펙터 연결)
     [SerializeField] private UIButton Button_Slot; // 버튼 (인스펙터 연결)
@@ -57,5 +57,10 @@ public class EncyclopediaSlotUI : MonoBehaviour
     private void OnSlotClicked()
     {
         _onSlotClickedCallback?.Invoke(_myGemData);
+    }
+
+    public void Test_SetAquired()
+    {
+        SetSlotState(true);
     }
 }

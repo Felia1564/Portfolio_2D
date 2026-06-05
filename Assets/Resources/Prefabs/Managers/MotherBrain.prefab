@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1073694d67baef40bd7661309c07c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MotherBrain
-  currentState: 0
+  testSlot: {fileID: 2113878630708118825, guid: f00ff799ff819f44d83ad36bc5a88511, type: 3}

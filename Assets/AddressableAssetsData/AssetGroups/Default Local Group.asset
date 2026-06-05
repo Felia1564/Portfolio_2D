@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a7fc8ae6265f7b47b6672ca8559679a
+    m_Address: Icon/Icon_Obj/Icon_Item/gem-1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b88eda6b16c9ba4d8011a270dc0d48c
     m_Address: Icon/Icon_Obj/Icon_Item/Icon_Item_Cherry_01
     m_ReadOnly: 0

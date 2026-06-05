@@ -153,7 +153,7 @@ public class MotherBrain : MonoBehaviour
             if (UIManager.Instance != null)
             {
                 // UIManager 쪽에 이전에 만들어둔 갱신 함수 호출
-                // UIManager.Instance.RefreshEncyclopediaIfOpened();
+                UIManager.Instance.RefreshEncyclopediaIfOpened();
             }
         }
         else

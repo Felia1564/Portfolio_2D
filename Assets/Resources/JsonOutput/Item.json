@@ -4,13 +4,15 @@
     "FieldObjectType": "Heal",
     "Name": "체리",
     "HealValue": 30,
-    "PrefabPath": "Item/DropItem_Cherry"
+    "PrefabPath": "Item/DropItem_Cherry",
+    "CollectionId": null
   },
   {
     "Id": "obj_collecton_gem_01",
     "FieldObjectType": "Collective",
     "Name": "보석",
     "HealValue": null,
-    "PrefabPath": "Collective/obj_collecton_gem_01"
+    "PrefabPath": "Collective/obj_collecton_gem_01",
+    "CollectionId": "collection_gem_01"
   }
 ]

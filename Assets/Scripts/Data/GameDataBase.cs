@@ -37,6 +37,7 @@ public class CollectionData : GameDataBase
     public string Name;
     public string Description;
     public string IconPath;
+    public string Type;
 }
 
 public class StageData : GameDataBase
@@ -59,6 +60,7 @@ public class ItemData : GameDataBase
     public string FieldObjType;
     public int HealValue;
     public string PrefabPath;
+    public string CollectionId;
 }
 
 [System.Serializable]
