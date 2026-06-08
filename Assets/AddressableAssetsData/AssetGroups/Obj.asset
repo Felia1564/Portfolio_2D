@@ -15,11 +15,47 @@ MonoBehaviour:
   m_GroupName: Obj
   m_GUID: 3f2d5cad2c9d5064a96d123ea0648e06
   m_SerializeEntries:
+  - m_GUID: 066a0057b8090c74eb181c1d13249421
+    m_Address: Collective/obj_collecton_gem_02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c3a459c414a387498e8ba1c22fbd766
+    m_Address: Collective/obj_collecton_gem_06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 26776526721ebd3499769df5df0a66e0
     m_Address: Trap/Trap_Spike
     m_ReadOnly: 0
     m_SerializedLabels:
     - Trap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3148082a6a8c24644844facbe9837070
+    m_Address: Collective/obj_collecton_gem_05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3231f3559b61d4644b8c8d12bc6d2b46
+    m_Address: Collective/obj_collecton_gem_07
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63eb1d446fb51b642a72f33f5aa9ae10
+    m_Address: Collective/obj_collecton_gem_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7545232df85a9454e89bfbb0f7e740e6
+    m_Address: Collective/obj_collecton_gem_04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7bc073d49a03d4841b532d3ae1011968
     m_Address: Item/DropItem_Cherry
@@ -27,10 +63,17 @@ MonoBehaviour:
     m_SerializedLabels:
     - Item
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4d3872eb5e1c5f42955e07da00f7548
+  - m_GUID: 8a78ec21e09955a4eb9c51ec27828c32
     m_Address: Collective/obj_collecton_gem_01
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Collective
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4d3872eb5e1c5f42955e07da00f7548
+    m_Address: Collective/obj_collecton_gem_00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Collective
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b171620870f83b042a7c24b43309eace, type: 2}

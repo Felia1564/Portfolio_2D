@@ -8,11 +8,67 @@
     "CollectionId": null
   },
   {
+    "Id": "obj_collecton_gem_00",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_00",
+    "CollectionId": "collection_gem_00"
+  },
+  {
     "Id": "obj_collecton_gem_01",
     "FieldObjectType": "Collective",
     "Name": "보석",
     "HealValue": null,
     "PrefabPath": "Collective/obj_collecton_gem_01",
     "CollectionId": "collection_gem_01"
+  },
+  {
+    "Id": "obj_collecton_gem_02",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_02",
+    "CollectionId": "collection_gem_02"
+  },
+  {
+    "Id": "obj_collecton_gem_03",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_03",
+    "CollectionId": "collection_gem_03"
+  },
+  {
+    "Id": "obj_collecton_gem_04",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_04",
+    "CollectionId": "collection_gem_04"
+  },
+  {
+    "Id": "obj_collecton_gem_05",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_05",
+    "CollectionId": "collection_gem_05"
+  },
+  {
+    "Id": "obj_collecton_gem_06",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_06",
+    "CollectionId": "collection_gem_06"
+  },
+  {
+    "Id": "obj_collecton_gem_07",
+    "FieldObjectType": "Collective",
+    "Name": "보석",
+    "HealValue": null,
+    "PrefabPath": "Collective/obj_collecton_gem_07",
+    "CollectionId": "collection_gem_07"
   }
 ]

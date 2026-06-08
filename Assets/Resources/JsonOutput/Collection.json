@@ -1,9 +1,58 @@
 [
   {
-    "Id": "collection_gem_01",
+    "Id": "collection_gem_00",
     "Name": "보석",
     "Description": "보석 1",
     "IconPath": "Icon/Icon_Obj/Icon_Item/gem-1",
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_01",
+    "Name": "보석",
+    "Description": "보석 2",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_02",
+    "Name": "보석",
+    "Description": "보석 3",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_03",
+    "Name": "보석",
+    "Description": "보석 4",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_04",
+    "Name": "보석",
+    "Description": "보석 5",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_05",
+    "Name": "보석",
+    "Description": "보석 6",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_06",
+    "Name": "보석",
+    "Description": "보석 7",
+    "IconPath": null,
+    "Type": "Item"
+  },
+  {
+    "Id": "collection_gem_07",
+    "Name": "보석",
+    "Description": "보석 8",
+    "IconPath": null,
     "Type": "Item"
   }
 ]

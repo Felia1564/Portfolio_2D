@@ -22,6 +22,16 @@
   {
     "Id": "dialogue_tutorial_1_1_003",
     "CharacterDataId": null,
+    "Description": "이런 보석의 경우엔 획득 시 도감 UI에 등록됩니다",
+    "NextDialogueId": null,
+    "SelectionNameList": null,
+    "SelectionDialogueIdList": null,
+    "TexturePath": null,
+    "VoicePath": null
+  },
+  {
+    "Id": "dialogue_tutorial_1_1_004",
+    "CharacterDataId": null,
     "Description": "이 우물 안으로 들어가시면 게임이 끝납니다",
     "NextDialogueId": null,
     "SelectionNameList": null,
