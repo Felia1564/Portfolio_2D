@@ -32,7 +32,7 @@
   {
     "Id": "dialogue_tutorial_1_1_004",
     "CharacterDataId": null,
-    "Description": "이 우물 안으로 들어가시면 게임이 끝납니다",
+    "Description": "이 우물 안으로 들어가시면 게임이 시작됩니다",
     "NextDialogueId": null,
     "SelectionNameList": null,
     "SelectionDialogueIdList": null,
